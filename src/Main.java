@@ -1,18 +1,32 @@
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
-public class Main {
-    public static void main(String[] args) {
-        // Press Alt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.print("Hello!");
+import acm.graphics.GObject;
+import acm.graphics.GPoint;
+import acm.program.GraphicsProgram;
 
+import java.awt.*;
+import java.awt.event.MouseEvent;
 
-        // Press Shift+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
+public class Main extends GraphicsProgram {
 
-            // Press Shift+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            System.out.println("i = " + i);
-        }
+    private final static int MAX_X = 300;
+    private final static int MAX_Y = 600;
+
+    private Button play;
+
+    public void run(){
+        this.setSize(MAX_X, MAX_Y);
+        addMouseListeners();
+        play = new Button(this, MAX_X/2.0, MAX_Y/2.0, 150, 50, Color.lightGray, "Start Game", Color.RED);
     }
+
+    public void mouseClicked(MouseEvent e) {
+
+        GPoint last = new GPoint(e.getPoint());
+        GObject objectUnderMouse = getElementAt(last);
+
+        if (objectUnderMouse != null && objectUnderMouse.equals(play)) {
+            removeAll();
+        }
+
+    }
+
 }
