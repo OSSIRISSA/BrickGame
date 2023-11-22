@@ -1,7 +1,10 @@
 import acm.graphics.*;
 import acm.program.GraphicsProgram;
 
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Ball extends GOval {
     public double vx = 3.0;
@@ -25,9 +28,30 @@ public class Ball extends GOval {
         program.add(this);
 
 
+        /**
+        *   TIMER
+        */
+        ActionListener taskPerformer = new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+
+                if (Ball.this.getX() + radius * 2 + vx >= program.getWidth() || Ball.this.getX() + vx < 0) {
+                    vx *= -1;
+                }
+                if (Ball.this.getY() + radius * 2 + vy >= program.getHeight() || Ball.this.getY() + vy < 0) {
+                    vy *= -1;
+                }
+                if (Ball.this.collidesWithRacket() && vy > 0) {
+                    vy *= -1;
+                }
+                Ball.this.move(vx, vy);
+
+            }
+        };
+        new Timer(10, taskPerformer).start();
+
         /*
             Hitting the ball from the walls and movement
-         */
+
         while (true) {
             if (this.getX() + radius * 2 + vx >= program.getWidth() || this.getX() + vx < 0) {
                 vx *= -1;
@@ -42,6 +66,7 @@ public class Ball extends GOval {
             pause(10);
         }
 
+         */
     }
 
     /**
