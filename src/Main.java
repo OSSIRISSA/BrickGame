@@ -82,7 +82,7 @@ public class Main extends GraphicsProgram {
 
 
     public void mousePressed(MouseEvent e) {
-
+        brick.breakIt();
         GPoint last = new GPoint(e.getPoint());
         GObject objectUnderMouse = getElementAt(last);
 
