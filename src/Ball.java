@@ -37,7 +37,11 @@ public class Ball extends GOval {
                 if (Ball.this.getX() + radius * 2 + vx >= program.getWidth() || Ball.this.getX() + vx < 0) {
                     vx *= -1;
                 }
-                if (Ball.this.getY() + radius * 2 + vy >= program.getHeight() || Ball.this.getY() + vy < 0) {
+                if (Ball.this.getY() + radius * 2 + vy >= program.getHeight() || Ball.this.getY() + vy < 50) {
+                    if(Ball.this.getY() + radius * 2 + vy>program.getHeight()*0.9){
+                        Heart.lifeCount--;
+                        Heart.updateLives();
+                    }
                     vy *= -1;
                 }
                 if (Ball.this.collidesWithRacket() && vy > 0) {
