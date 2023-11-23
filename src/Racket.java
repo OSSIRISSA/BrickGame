@@ -1,24 +1,20 @@
+import acm.graphics.GCompound;
+import acm.graphics.GImage;
 import acm.graphics.GRect;
 import acm.program.GraphicsProgram;
 import java.awt.*;
 
-public class Racket extends GRect {
+public class Racket extends GImage {
 
     /**
      * Creates a racket
      * @param program - program, who called
      * @param centerX - x of the center of the racket
      * @param centerY - y of the center of the racket
-     * @param width - width of the racket
-     * @param height - height of the racket
-     * @param color - color of the racket
      */
-    public Racket(GraphicsProgram program, double centerX, double centerY, double width, double height, Color color){
-        super(centerX-width/2,centerY-height/2,width,height);
-        this.setColor(color);
-        this.setFilled(true);
-        program.add(this);
-
+    public Racket(GraphicsProgram program, String image, double centerX, double centerY){
+        super(image);
+        program.add(this, centerX-this.getWidth()/2,centerY-this.getHeight()/2);
 
     }
 

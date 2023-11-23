@@ -64,11 +64,11 @@ public class Main extends GraphicsProgram {
         GRect bar = new GRect(0,0,MAX_X,49);
         bar.setFilled(true);
         add(bar);
-        racket = new Racket(this,MAX_X/2.0, this.getHeight()*0.9,100,10,Color.BLACK);
-        ball = new Ball(this, random.nextDouble(1,MAX_X), random.nextDouble(0,MAX_Y),BALL_RADIUS,Color.BLACK);
-        life1 = new Heart(this,25.0,25.0,50.0,50.0,"assets/heart.gif");
-        life2 = new Heart(this,75.0,25.0,50.0,50.0,"assets/heart.gif");
-        life3 = new Heart(this,125.0,25.0,50.0,50.0,"assets/heart.gif");
+        racket = new Racket(this, "assets/board.png", MAX_X/2.0, this.getHeight()*0.9);
+        ball = new Ball(this, random.nextDouble(1,MAX_X-BALL_RADIUS*2-1), random.nextDouble(50,MAX_Y-100),BALL_RADIUS,Color.CYAN);
+        life1 = new Heart(this,25.0,25.0,50.0,50.0,"assets/heart1.gif");
+        life2 = new Heart(this,75.0,25.0,50.0,50.0,"assets/heart3.gif");
+        life3 = new Heart(this,125.0,25.0,50.0,50.0,"assets/heart2.gif");
     }
 
 
