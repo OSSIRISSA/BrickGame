@@ -23,8 +23,9 @@ public class Ball extends GOval {
     public Ball(GraphicsProgram program, double centerX, double centerY, double radius, Color color) {
         super(centerX - radius, centerY - radius, radius * 2, radius * 2);
         this.program = program;
-        this.setColor(color);
+        this.setColor(Color.BLACK);
         this.setFilled(true);
+        this.setFillColor(color);
         program.add(this);
 
 
