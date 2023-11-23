@@ -19,7 +19,8 @@ public class Main extends GraphicsProgram {
     public void run(){
         this.setSize(MAX_X+14, MAX_Y+60);
         addMouseListeners();
-        game();
+
+        play = new Button(this, MAX_X/2.0, MAX_Y/2.0, MAX_X/2.0, MAX_Y/10, Color.GRAY, "Start Game", Color.RED);
     }
 
     public void mouseClicked(MouseEvent e) {
@@ -28,16 +29,17 @@ public class Main extends GraphicsProgram {
         GObject objectUnderMouse = getElementAt(last);
 
         if (objectUnderMouse != null && objectUnderMouse.equals(play)) {
+            removeAll();
             game();
-            //removeAll();
         }
-
     }
 
     public void mouseMoved(MouseEvent e){
         GPoint last = new GPoint(e.getPoint());
         GObject objectUnderMouse = getElementAt(last);
-        racket.movingToMouse(e.getX());
+        if (racket!=null) {
+            racket.movingToMouse(e.getX());
+        }
     }
 
     private void game() {
