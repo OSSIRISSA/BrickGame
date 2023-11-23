@@ -1,5 +1,6 @@
 import acm.graphics.GObject;
 import acm.graphics.GPoint;
+import acm.graphics.GRect;
 import acm.program.GraphicsProgram;
 import acm.util.RandomGenerator;
 import java.awt.*;
@@ -15,6 +16,10 @@ public class Main extends GraphicsProgram {
     public Button play;
     public Ball ball;
     public static Racket racket;
+
+    public Heart life1;
+    public Heart life2;
+    public Heart life3;
 
     public void run(){
         this.setSize(MAX_X+14, MAX_Y+60);
@@ -43,8 +48,12 @@ public class Main extends GraphicsProgram {
     }
 
     private void game() {
+        GRect bar = new GRect(0,0,MAX_X,MAX_Y/10);
+        bar.setFilled(true);
+        add(bar);
         racket = new Racket(this,MAX_X/2.0, this.getHeight()*0.9,100,10,Color.BLACK);
         ball = new Ball(this, random.nextDouble(1,MAX_X), random.nextDouble(0,MAX_Y),BALL_RADIUS,Color.BLACK);
+        life1 = new Heart(this,25.0,25.0,50.0,50.0,"heart.gif");
     }
 
 }
