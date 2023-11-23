@@ -65,7 +65,7 @@ public class Main extends GraphicsProgram {
         add(bar);
         racket = new Racket(this,MAX_X/2.0, this.getHeight()*0.9,100,10,Color.BLACK);
         ball = new Ball(this, random.nextDouble(1,MAX_X), random.nextDouble(0,MAX_Y),BALL_RADIUS,Color.BLACK);
-        life1 = new Heart(this,25.0,25.0,50.0,50.0,"heart.gif");
+        life1 = new Heart(this,25.0,25.0,50.0,50.0,"assets/heart.gif");
     }
 
 
