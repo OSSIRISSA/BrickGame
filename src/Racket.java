@@ -1,10 +1,10 @@
-import acm.graphics.GCompound;
 import acm.graphics.GImage;
-import acm.graphics.GRect;
 import acm.program.GraphicsProgram;
-import java.awt.*;
 
 public class Racket extends GImage {
+
+    GraphicsProgram program;
+    public boolean isGameStarted=false;
 
     /**
      * Creates a racket
@@ -14,8 +14,8 @@ public class Racket extends GImage {
      */
     public Racket(GraphicsProgram program, String image, double centerX, double centerY){
         super(image);
-        program.add(this, centerX-this.getWidth()/2,centerY-this.getHeight()/2);
-
+        this.program=program;
+        this.setLocation(centerX-this.getWidth()/2,centerY-this.getHeight()/2);
     }
 
     /**
@@ -31,5 +31,15 @@ public class Racket extends GImage {
                 this.move(-1,0);
             }
         }
+    }
+
+    public void show(){
+        isGameStarted=true;
+        program.add(this);
+    }
+
+    public void hide(){
+        isGameStarted=false;
+       program.remove(this);
     }
 }

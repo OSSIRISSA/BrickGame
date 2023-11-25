@@ -1,102 +1,115 @@
 import acm.graphics.*;
 import acm.program.GraphicsProgram;
 import acm.util.RandomGenerator;
-import acm.util.SoundClip;
-
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 
 public class Main extends GraphicsProgram {
-
     public final static int MAX_X = 700;
     public final static int MAX_Y = 700;
+    public static int currentLevel=1;
     public final static double BALL_RADIUS = 5;
-    private final RandomGenerator random = RandomGenerator.getInstance();
-    private SoundClip Crack = new SoundClip("assets/Crack.au");
+    public GObject objectUnderMouse;
+    public static Font cyberFont;
 
-    private final static int  BRICK_NUMBER_X= 16;
-    private final static int BRICK_NUMBER_Y= 3;
-    private final static int BRICK_WIDTH = MAX_X /BRICK_NUMBER_X;
-    private final static int BRICK_HEIGHT = 40;
-    Font cyberFont = Font.createFont(Font.TRUETYPE_FONT, new File("assets/SpaceMonkey.ttf")).deriveFont(12f);
-
-    public Button play;
-    public Ball ball;
-    public static Racket racket;
-
-    public static Brick brick;
-    public static Heart life1;
-    public static Heart life2;
-    public static Heart life3;
-
-
-    public Main() throws IOException, FontFormatException {
+    static {
+        try {
+            cyberFont = Font.createFont(Font.TRUETYPE_FONT, new File("assets/SpaceMonkey.ttf")).deriveFont(12f);
+        } catch (FontFormatException | IOException e) {
+            throw new RuntimeException(e);
+        }
     }
-
+    private final MainMenu mainMenu = new MainMenu(this);;
+    private final LevelSelection levelSelection = new LevelSelection(this);
+    LevelButton levelButton;
+    private final Level1 level1 = new Level1(this);
+    public static Racket racket;
     public void run(){
         this.setSize(MAX_X+14, MAX_Y+60);
         addMouseListeners();
-        play = new Button(this, MAX_X/2.0, MAX_Y/2.0, MAX_X/2.0, MAX_Y/10, Color.LIGHT_GRAY, "Start Game", Color.RED, cyberFont);
-    }
-
-    public void mouseClicked(MouseEvent e) {
-
-        GPoint last = new GPoint(e.getPoint());
-        GObject objectUnderMouse = getElementAt(last);
-
-        if (objectUnderMouse != null && objectUnderMouse.equals(play)) {
-            removeAll();
-            game();
-        }
+        mainMenu.addToScreen();
     }
 
     public void mouseMoved(MouseEvent e){
         GPoint last = new GPoint(e.getPoint());
-        GObject objectUnderMouse = getElementAt(last);
-        if (racket!=null) {
+        GObject previousObjectUnderMouse = objectUnderMouse;
+        objectUnderMouse = getElementAt(last);
+
+        if (racket!=null && racket.isGameStarted) {
             racket.movingToMouse(e.getX());
+        } else {
+            if ((previousObjectUnderMouse != null) && (!previousObjectUnderMouse.equals(objectUnderMouse))) {
+                if (previousObjectUnderMouse.equals(mainMenu.getPlayButton())) {
+                    mainMenu.getPlayButton().released();
+                } else if (previousObjectUnderMouse.getClass().equals(LevelButton.class)) {
+                    levelButton = ((LevelButton) previousObjectUnderMouse);
+                    if (!levelButton.isPressed && levelButton.isEnabled) {
+                        levelButton.released();
+                    }
+                }
+            } else if ((objectUnderMouse != null) && (previousObjectUnderMouse == null || previousObjectUnderMouse.getClass().equals(LevelButton.class))) {
+                if (objectUnderMouse.equals(mainMenu.getPlayButton())) {
+                    mainMenu.getPlayButton().hovered();
+                } else if (objectUnderMouse.getClass().equals(LevelButton.class)) {
+                    levelButton = ((LevelButton) objectUnderMouse);
+                    if (!levelButton.isPressed && levelButton.isEnabled) {
+                        levelButton.hovered();
+                    }
+                }
+            }
         }
-
-        if (objectUnderMouse != null && objectUnderMouse.equals(play) && !play.isPressed) {
-            play.hovered();
-        }// else play.released();
     }
 
-    private void game() {
-
-        GImage bg = new GImage("assets/bg1.jpg");
-        add(bg);
-
-        GRect bar = new GRect(0,0,MAX_X,49);
-        bar.setFilled(true);
-        add(bar);
-        racket = new Racket(this, "assets/board.png", MAX_X/2.0, this.getHeight()*0.9);
-        ball = new Ball(this, random.nextDouble(1,MAX_X-BALL_RADIUS*2-1), random.nextDouble(50,MAX_Y-100),BALL_RADIUS,Color.CYAN);
-        life1 = new Heart(this,25.0,25.0,50.0,50.0,"assets/heart1.gif");
-        life2 = new Heart(this,75.0,25.0,50.0,50.0,"assets/heart3.gif");
-        life3 = new Heart(this,125.0,25.0,50.0,50.0,"assets/heart2.gif");
-        brick = new HardBrick(this, 100, 200, BRICK_WIDTH, BRICK_HEIGHT,Color.RED);
+    public void mouseClicked(MouseEvent e) {
+        if (objectUnderMouse != null && objectUnderMouse.equals(mainMenu.getPlayButton())) {
+            mainMenu.removeFromScreen();
+            levelSelection.addToScreen();
+        } else if(objectUnderMouse != null && objectUnderMouse.getClass().equals(LevelButton.class)){
+            levelButton = ((LevelButton) objectUnderMouse);
+            if(levelButton.isEnabled) {
+                levelSelection.removeFromScreen();
+                switch (Integer.parseInt(levelButton.getButtonText().getLabel())) {
+                    case 1 -> level1.addToScreen();
+                    case 2 -> System.out.println(2);
+                    case 3 -> System.out.println(3);
+                    case 4 -> System.out.println(4);
+                    case 5 -> System.out.println(5);
+                    case 6 -> System.out.println(6);
+                    case 7 -> System.out.println(7);
+                    case 8 -> System.out.println(8);
+                    case 9 -> System.out.println(9);
+                    case 10 -> System.out.println(10);
+                    case 11 -> System.out.println(11);
+                    case 12 -> System.out.println(12);
+                    case 13 -> System.out.println(13);
+                    case 14 -> System.out.println(14);
+                    case 15 -> System.out.println(15);
+                    case 16 -> System.out.println(16);
+                    default -> System.out.println("WTF???");
+                }
+            }
+        }
     }
-
 
     public void mousePressed(MouseEvent e) {
-        brick.breakIt();
-        GPoint last = new GPoint(e.getPoint());
-        GObject objectUnderMouse = getElementAt(last);
-
-        if (objectUnderMouse != null && objectUnderMouse.equals(play)) {
-            play.pressed();
-            play.isPressed=true;
+        if (objectUnderMouse != null && objectUnderMouse.equals(mainMenu.getPlayButton())) {
+            mainMenu.getPlayButton().pressed();
+            mainMenu.getPlayButton().isPressed=true;
+        } else if (objectUnderMouse!=null && objectUnderMouse.equals(levelButton) && levelButton.isEnabled){
+            levelButton.pressed();
+            levelButton.isPressed=true;
         }
     }
 
-
     public void mouseReleased(MouseEvent e) {
-        if (play.isPressed) {
-            play.released();
-            play.isPressed=false;
+        if (mainMenu.getPlayButton().isPressed) {
+            mainMenu.getPlayButton().released();
+            mainMenu.getPlayButton().isPressed=false;
+        } else if(levelButton!=null && levelButton.isPressed) {
+            levelButton.released();
+            levelButton.isPressed=false;
         }
     }
 }

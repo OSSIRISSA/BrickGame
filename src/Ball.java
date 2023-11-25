@@ -10,7 +10,7 @@ public class Ball extends GOval {
     public double vx = 3.0;
     public double vy = 3.0;
     private final GraphicsProgram program;
-
+    private final double radius;
 
     /**
      * Creates a ball
@@ -23,15 +23,41 @@ public class Ball extends GOval {
     public Ball(GraphicsProgram program, double centerX, double centerY, double radius, Color color) {
         super(centerX - radius, centerY - radius, radius * 2, radius * 2);
         this.program = program;
+        this.radius=radius;
         this.setColor(Color.BLACK);
         this.setFilled(true);
         this.setFillColor(color);
-        program.add(this);
+        /*
+            Hitting the ball from the walls and movement
 
+        while (true) {
+            if (this.getX() + radius * 2 + vx >= program.getWidth() || this.getX() + vx < 0) {
+                vx *= -1;
+            }
+            if (this.getY() + radius * 2 + vy >= program.getHeight() || this.getY() + vy < 0) {
+                vy *= -1;
+            }
+            if (this.collidesWithRacket() && vy > 0) {
+                vy *= -1;
+            }
+            this.move(vx, vy);
+            pause(10);
+        }*/
+    }
 
-        /**
-        *   TIMER
-        */
+    /**
+     * @return - condition "if ball touches the racket"
+     */
+    private boolean collidesWithRacket() {
+        GObject objectUnderMouse = program.getElementAt(this.getX(), this.getY() + this.getHeight() + 1);
+        return (objectUnderMouse != null && objectUnderMouse.equals(Main.racket));
+    }
+
+    private void gameStarted(){
+
+        /*
+         *   TIMER
+         */
         ActionListener taskPerformer = new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
 
@@ -53,32 +79,14 @@ public class Ball extends GOval {
             }
         };
         new Timer(10, taskPerformer).start();
-
-        /*
-            Hitting the ball from the walls and movement
-
-        while (true) {
-            if (this.getX() + radius * 2 + vx >= program.getWidth() || this.getX() + vx < 0) {
-                vx *= -1;
-            }
-            if (this.getY() + radius * 2 + vy >= program.getHeight() || this.getY() + vy < 0) {
-                vy *= -1;
-            }
-            if (this.collidesWithRacket() && vy > 0) {
-                vy *= -1;
-            }
-            this.move(vx, vy);
-            pause(10);
-        }
-
-         */
     }
 
-    /**
-     * @return - condition "if ball touches the racket"
-     */
-    private boolean collidesWithRacket() {
-        GObject objectUnderMouse = getParent().getElementAt(this.getX(), this.getY() + this.getHeight() + 1);
-        return (objectUnderMouse != null && objectUnderMouse.equals(Main.racket));
+    public void show(){
+        gameStarted();
+        program.add(this);
+    }
+
+    public void hide(){
+        program.remove(this);
     }
 }
