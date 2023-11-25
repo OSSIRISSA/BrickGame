@@ -1,6 +1,5 @@
 import acm.graphics.*;
 import acm.program.GraphicsProgram;
-import acm.util.RandomGenerator;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -21,7 +20,7 @@ public class Main extends GraphicsProgram {
             throw new RuntimeException(e);
         }
     }
-    private final MainMenu mainMenu = new MainMenu(this);;
+    private final MainMenu mainMenu = new MainMenu(this);
     private final LevelSelection levelSelection = new LevelSelection(this);
     LevelButton levelButton;
     private final Level1 level1 = new Level1(this);

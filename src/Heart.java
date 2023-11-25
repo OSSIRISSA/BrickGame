@@ -1,8 +1,5 @@
 import acm.graphics.GImage;
-import acm.graphics.GRect;
 import acm.program.GraphicsProgram;
-import java.awt.*;
-
 
 public class Heart extends GImage {
 
@@ -16,7 +13,7 @@ public class Heart extends GImage {
     }
 
     public static void updateLives(){
-        if(lifeCount==2){
+        /*if(lifeCount==2){
             //program.remove(Main.life3);
         }
         if(lifeCount==1){
@@ -25,18 +22,8 @@ public class Heart extends GImage {
         if(lifeCount==0){
             //program.remove(Main.life1);
 
-        }
+        }*/
     }
-    /*public void movingToMouse(int x){
-        while(this.getX()+getWidth()/2!=x){
-            if(this.getX()+getWidth()/2<x){
-                this.move(1,0);
-            }
-            if(this.getX()+getWidth()/2>x){
-                this.move(-1,0);
-            }
-        }
-    }*/
 
     public void show(){
         program.add(this);
