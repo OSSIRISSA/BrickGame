@@ -10,6 +10,9 @@ public class Main extends GraphicsProgram {
     public final static int MAX_Y = 700;
     public static int currentLevel=1;
     public final static double BALL_RADIUS = 5;
+
+    public boolean waitingForStart = false;
+
     public GObject objectUnderMouse;
     public static Font cyberFont;
 
@@ -24,6 +27,8 @@ public class Main extends GraphicsProgram {
     private final LevelSelection levelSelection = new LevelSelection(this);
     LevelButton levelButton;
     public static Racket racket;
+
+    public static  Ball ball;
     public void run(){
         this.setSize(MAX_X+14, MAX_Y+60);
         addMouseListeners();
@@ -61,6 +66,10 @@ public class Main extends GraphicsProgram {
     }
 
     public void mouseClicked(MouseEvent e) {
+        if (waitingForStart) {
+            LevelMaster.racket.isGameStarted=true;
+            LevelMaster.ball.gameStarted();
+        } else
         if (objectUnderMouse != null && objectUnderMouse.equals(mainMenu.getPlayButton())) {
             mainMenu.removeFromScreen();
             levelSelection.addToScreen();
@@ -87,6 +96,7 @@ public class Main extends GraphicsProgram {
                     case 16 -> System.out.println(16);
                     default -> System.out.println("WTF???");
                 }
+                waitingForStart = true;
             }
         }
     }

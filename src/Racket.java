@@ -34,7 +34,6 @@ public class Racket extends GImage {
     }
 
     public void show(){
-        isGameStarted=true;
         program.add(this);
     }
 

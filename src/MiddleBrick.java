@@ -25,9 +25,19 @@ public class MiddleBrick extends Brick {
                 program.add(this);
 
         } else {
-            program.remove(this);
+            hide();
             program.remove(crack);
             this.IsBroken = true;
         }
+    }
+
+    @Override
+    public void hide() {
+        super.hide();
+    }
+
+    @Override
+    public void show() {
+        super.show();
     }
 }

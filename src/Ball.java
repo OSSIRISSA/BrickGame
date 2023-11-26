@@ -13,6 +13,7 @@ public class Ball extends GOval {
     public double vy = 3.0;
     private final GraphicsProgram program;
     private final double radius;
+    public boolean isGameStarted=false;
 
     /**
      * Creates a ball
@@ -51,7 +52,7 @@ public class Ball extends GOval {
      * @return - condition "if ball touches the racket"
      */
     private boolean collidesWithRacket() {
-        GObject objectUnderMouse = program.getElementAt(this.getX(), this.getY() + this.getHeight() + 1);
+        GObject objectUnderMouse = program.getElementAt(this.getX()+this.getWidth()/2, this.getY() + this.getHeight() + 1);
         return (objectUnderMouse != null && objectUnderMouse.equals(Main.racket));
     }
 
@@ -73,56 +74,72 @@ public class Ball extends GOval {
         GObject underDot7 = program.getElementAt(dot7);
         GObject underDot8 = program.getElementAt(dot8);
         if((underDot1!=null&&Brick.class.isAssignableFrom(underDot1.getClass()))||(underDot2!=null&&Brick.class.isAssignableFrom(underDot2.getClass()))){
-            brick= ((Brick) underDot1);
-            brick2= ((Brick) underDot2);
+            if(underDot1 instanceof Brick){
+                brick= ((Brick) underDot1);
+            }
+            if(underDot2 instanceof Brick){
+                brick2= ((Brick) underDot2);
+            }
             if(brick.equals(brick2)){
                 brick.breakIt();
             }
             else{
-                brick.breakIt();
-                brick2.breakIt();
+                if(brick!=null) brick.breakIt();
+                if(brick2!=null) brick2.breakIt();
             }
             vy*=-1;
         }
         if((underDot3!=null&&Brick.class.isAssignableFrom(underDot3.getClass()))||(underDot4!=null&&Brick.class.isAssignableFrom(underDot4.getClass()))){
-            brick= ((Brick) underDot3);
-            brick2= ((Brick) underDot4);
+            if(underDot3 instanceof Brick){
+                brick= ((Brick) underDot3);
+            }
+            if(underDot4 instanceof Brick){
+                brick2= ((Brick) underDot4);
+            }
             if(brick.equals(brick2)){
                 brick.breakIt();
             }
             else{
-                brick.breakIt();
-                brick2.breakIt();
+                if(brick!=null) brick.breakIt();
+                if(brick2!=null) brick2.breakIt();
             }
             vx*=-1;
         }
         if((underDot8!=null&&Brick.class.isAssignableFrom(underDot8.getClass()))||(underDot7!=null&&Brick.class.isAssignableFrom(underDot7.getClass()))){
-            brick= ((Brick) underDot8);
-            brick2= ((Brick) underDot7);
+            if(underDot8 instanceof Brick){
+                brick= ((Brick) underDot8);
+            }
+            if(underDot7 instanceof Brick){
+                brick2= ((Brick) underDot7);
+            }
             if(brick.equals(brick2)){
                 brick.breakIt();
             }
             else{
-                brick.breakIt();
-                brick2.breakIt();
+                if(brick!=null) brick.breakIt();
+                if(brick2!=null) brick2.breakIt();
             }
             vx*=-1;
         }
         if((underDot6!=null&&Brick.class.isAssignableFrom(underDot6.getClass()))||(underDot5!=null&&Brick.class.isAssignableFrom(underDot5.getClass()))){
-            brick= ((Brick) underDot6);
-            brick2= ((Brick) underDot5);
+            if(underDot6 instanceof Brick){
+                brick= ((Brick) underDot6);
+            }
+            if(underDot5 instanceof Brick){
+                brick2= ((Brick) underDot5);
+            }
             if(brick.equals(brick2)){
                 brick.breakIt();
             }
             else{
-                brick.breakIt();
-                brick2.breakIt();
+                if(brick!=null) brick.breakIt();
+                if(brick2!=null) brick2.breakIt();
             }
             vy*=-1;
         }
     }
 
-    private void gameStarted(){
+    public void gameStarted(){
 
         /*
          *   TIMER
@@ -142,6 +159,7 @@ public class Ball extends GOval {
                 }
                 if (Ball.this.collidesWithRacket() && vy > 0) {
                     vy *= -1;
+                    vx=collideAngle();
                 }
                 collidesWithBrick();
                 Ball.this.move(vx, vy);
@@ -151,8 +169,28 @@ public class Ball extends GOval {
         new Timer(10, taskPerformer).start();
     }
 
+    private double collideAngle() {
+        double vxMax=3.0;
+        double vxMin=3.0*0.2;
+
+        GObject ballCollider = program.getElementAt(this.getX()+this.getWidth()/2, this.getY() + this.getHeight() + 1);
+        Racket racket = ((Racket) ballCollider);
+        double ballMiddleX = this.getX()+this.getWidth()/2.0-racket.getX();
+        double racketMiddleX = racket.getWidth()/2.0;
+
+        if (racketMiddleX>ballMiddleX){
+            ballMiddleX/=racketMiddleX;
+            return -vxMax-((-vxMax+vxMin)*ballMiddleX-vxMin);
+        } else {
+            ballMiddleX-=racketMiddleX;
+            ballMiddleX=racketMiddleX-ballMiddleX;
+            ballMiddleX/=racketMiddleX;
+            ballMiddleX=1-ballMiddleX;
+            return (vxMax-vxMin)*ballMiddleX+vxMin;
+        }
+    }
+
     public void show(){
-        gameStarted();
         program.add(this);
     }
 

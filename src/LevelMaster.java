@@ -11,8 +11,8 @@ public class LevelMaster extends ScreenParent {
     private final RandomGenerator random = RandomGenerator.getInstance();
     public GImage bg;
     public GRect bar;
-    public Ball ball;
-    public Racket racket;
+    public static Ball ball;
+    public static Racket racket;
     public static Brick brick;
     public static Heart life1;
     public static Heart life2;
@@ -33,8 +33,9 @@ public class LevelMaster extends ScreenParent {
         bar.setFilled(true);
 
         racket = new Racket(program, "assets/board.png", sizeX/2.0, sizeY*0.9);
-        Main.racket = this.racket;
-        ball = new Ball(program, random.nextDouble(1,sizeX-radius*2-1), random.nextDouble(50,sizeY-100),radius, Color.CYAN);
+        Main.racket = racket;
+        ball = new Ball(program, racket.getX()+racket.getWidth()/2.0, racket.getY()-radius-2, radius, Color.CYAN);
+        Main.ball = ball;
         life1 = new Heart(program,25.0,25.0,50.0,50.0,"assets/heart1.gif");
         life2 = new Heart(program,75.0,25.0,50.0,50.0,"assets/heart3.gif");
         life3 = new Heart(program,125.0,25.0,50.0,50.0,"assets/heart2.gif");

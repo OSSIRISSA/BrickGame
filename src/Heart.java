@@ -13,16 +13,16 @@ public class Heart extends GImage {
     }
 
     public static void updateLives(){
-        /*if(lifeCount==2){
-            //program.remove(Main.life3);
+        if(lifeCount==2){
+            program.remove(LevelMaster.life3);
         }
         if(lifeCount==1){
-            //program.remove(Main.life2);
+            program.remove(LevelMaster.life2);
         }
         if(lifeCount==0){
-            //program.remove(Main.life1);
+            program.remove(LevelMaster.life1);
 
-        }*/
+        }
     }
 
     public void show(){

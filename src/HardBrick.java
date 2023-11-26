@@ -26,7 +26,7 @@ public class HardBrick extends Brick{
                 crack.setSize(this.getWidth(), this.getHeight());
             }
         } else {
-            program.remove(this);
+            hide();
             program.remove(crack);
             this.IsBroken = true;
         }
