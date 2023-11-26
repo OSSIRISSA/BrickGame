@@ -30,7 +30,7 @@ public class Level1 extends LevelMaster{
         this.BRICK_HEIGHT = 40;
         for (int i=1; i<= BRICK_NUMBER_Y; i++){
             for (int j=1; j<=BRICK_NUMBER_X; j++){
-                brick= new HardBrick(program, (j-1)*BRICK_WIDTH, (i-1)*BRICK_HEIGHT+50, BRICK_WIDTH, BRICK_HEIGHT, Color.RED);
+                brick= new HardBrick(program, (j-1)*BRICK_WIDTH, (i-1)*BRICK_HEIGHT+50, BRICK_WIDTH, BRICK_HEIGHT, "assets/defaultBrick.jpg");
                 brick.show();
                 //System.out.println("added");
             }
