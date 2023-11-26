@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Ball extends GOval {
+    private Brick brick;
     public double vx = 3.0;
     public double vy = 3.0;
     private final GraphicsProgram program;
@@ -51,6 +52,69 @@ public class Ball extends GOval {
     private boolean collidesWithRacket() {
         GObject objectUnderMouse = program.getElementAt(this.getX(), this.getY() + this.getHeight() + 1);
         return (objectUnderMouse != null && objectUnderMouse.equals(Main.racket));
+    }
+
+    private void collidesWithBrick(){
+        GPoint dot1 = new GPoint(this.getX(),this.getY()-Math.abs(vy));
+        GPoint dot2 = new GPoint(this.getX()+radius*2,this.getY()-Math.abs(vy));
+        GPoint dot3 = new GPoint(this.getX()+radius*2+Math.abs(vx),this.getY());
+        GPoint dot4 = new GPoint(this.getX()+radius*2+Math.abs(vx),this.getY()+radius*2);
+        GPoint dot5 = new GPoint(this.getX()+radius*2,this.getY()+radius*2+Math.abs(vy));
+        GPoint dot6 = new GPoint(this.getX(),this.getY()+radius*2+Math.abs(vy));
+        GPoint dot7 = new GPoint(this.getX()-Math.abs(vx),this.getY()+radius*2);
+        GPoint dot8 = new GPoint(this.getX()-Math.abs(vx),this.getY());
+        GObject underDot1 = program.getElementAt(dot1);
+        GObject underDot2 = program.getElementAt(dot2);
+        GObject underDot3 = program.getElementAt(dot3);
+        GObject underDot4 = program.getElementAt(dot4);
+        GObject underDot5 = program.getElementAt(dot5);
+        GObject underDot6 = program.getElementAt(dot6);
+        GObject underDot7 = program.getElementAt(dot7);
+        GObject underDot8 = program.getElementAt(dot8);
+        if((underDot1!=null&&underDot1.getClass().equals(Brick.class))||(underDot2!=null&&underDot2.getClass().equals(Brick.class))){
+            brick= ((Brick) underDot1);
+            if(brick!=null){
+                brick.breakIt();
+            }
+            brick= ((Brick) underDot2);
+            if(brick!=null){
+                brick.breakIt();
+            }
+            vy*=-1;
+        }
+        if((underDot3!=null&&underDot3.getClass().equals(Brick.class))||(underDot4!=null&&underDot4.getClass().equals(Brick.class))){
+            brick= ((Brick) underDot3);
+            if(brick!=null){
+                brick.breakIt();
+            }
+            brick= ((Brick) underDot4);
+            if(brick!=null){
+                brick.breakIt();
+            }
+            vx*=-1;
+        }
+        if((underDot8!=null&&underDot8.getClass().equals(Brick.class))||(underDot7!=null&&underDot7.getClass().equals(Brick.class))){
+            brick= ((Brick) underDot7);
+            if(brick!=null){
+                brick.breakIt();
+            }
+            brick= ((Brick) underDot8);
+            if(brick!=null){
+                brick.breakIt();
+            }
+            vx*=-1;
+        }
+        if((underDot6!=null&&underDot6.getClass().equals(Brick.class))||(underDot5!=null&&underDot5.getClass().equals(Brick.class))){
+            brick= ((Brick) underDot5);
+            if(brick!=null){
+                brick.breakIt();
+            }
+            brick= ((Brick) underDot6);
+            if(brick!=null){
+                brick.breakIt();
+            }
+            vy*=-1;
+        }
     }
 
     private void gameStarted(){

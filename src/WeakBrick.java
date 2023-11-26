@@ -13,10 +13,7 @@ private GImage crack;
         program.add(crack);
     }
     public void breakIt(){
-        IsBroken=true;
-        Crack.setVolume(1);
-        Crack.play();
-        program.remove(this);
+        super.breakIt();
         program.remove(crack);
     }
 
