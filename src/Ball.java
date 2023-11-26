@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 
 public class Ball extends GOval {
     private Brick brick;
+    private Brick brick2;
     public double vx = 3.0;
     public double vy = 3.0;
     private final GraphicsProgram program;
@@ -71,47 +72,51 @@ public class Ball extends GOval {
         GObject underDot6 = program.getElementAt(dot6);
         GObject underDot7 = program.getElementAt(dot7);
         GObject underDot8 = program.getElementAt(dot8);
-        if((underDot1!=null&&underDot1.getClass().equals(Brick.class))||(underDot2!=null&&underDot2.getClass().equals(Brick.class))){
+        if((underDot1!=null&&Brick.class.isAssignableFrom(underDot1.getClass()))||(underDot2!=null&&Brick.class.isAssignableFrom(underDot2.getClass()))){
             brick= ((Brick) underDot1);
-            if(brick!=null){
+            brick2= ((Brick) underDot2);
+            if(brick.equals(brick2)){
                 brick.breakIt();
             }
-            brick= ((Brick) underDot2);
-            if(brick!=null){
+            else{
                 brick.breakIt();
+                brick2.breakIt();
             }
             vy*=-1;
         }
-        if((underDot3!=null&&underDot3.getClass().equals(Brick.class))||(underDot4!=null&&underDot4.getClass().equals(Brick.class))){
+        if((underDot3!=null&&Brick.class.isAssignableFrom(underDot3.getClass()))||(underDot4!=null&&Brick.class.isAssignableFrom(underDot4.getClass()))){
             brick= ((Brick) underDot3);
-            if(brick!=null){
+            brick2= ((Brick) underDot4);
+            if(brick.equals(brick2)){
                 brick.breakIt();
             }
-            brick= ((Brick) underDot4);
-            if(brick!=null){
+            else{
                 brick.breakIt();
+                brick2.breakIt();
             }
             vx*=-1;
         }
-        if((underDot8!=null&&underDot8.getClass().equals(Brick.class))||(underDot7!=null&&underDot7.getClass().equals(Brick.class))){
-            brick= ((Brick) underDot7);
-            if(brick!=null){
-                brick.breakIt();
-            }
+        if((underDot8!=null&&Brick.class.isAssignableFrom(underDot8.getClass()))||(underDot7!=null&&Brick.class.isAssignableFrom(underDot7.getClass()))){
             brick= ((Brick) underDot8);
-            if(brick!=null){
+            brick2= ((Brick) underDot7);
+            if(brick.equals(brick2)){
                 brick.breakIt();
+            }
+            else{
+                brick.breakIt();
+                brick2.breakIt();
             }
             vx*=-1;
         }
-        if((underDot6!=null&&underDot6.getClass().equals(Brick.class))||(underDot5!=null&&underDot5.getClass().equals(Brick.class))){
-            brick= ((Brick) underDot5);
-            if(brick!=null){
+        if((underDot6!=null&&Brick.class.isAssignableFrom(underDot6.getClass()))||(underDot5!=null&&Brick.class.isAssignableFrom(underDot5.getClass()))){
+            brick= ((Brick) underDot6);
+            brick2= ((Brick) underDot5);
+            if(brick.equals(brick2)){
                 brick.breakIt();
             }
-            brick= ((Brick) underDot6);
-            if(brick!=null){
+            else{
                 brick.breakIt();
+                brick2.breakIt();
             }
             vy*=-1;
         }
@@ -138,6 +143,7 @@ public class Ball extends GOval {
                 if (Ball.this.collidesWithRacket() && vy > 0) {
                     vy *= -1;
                 }
+                collidesWithBrick();
                 Ball.this.move(vx, vy);
 
             }

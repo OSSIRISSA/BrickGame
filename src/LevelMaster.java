@@ -48,11 +48,12 @@ public class LevelMaster extends ScreenParent {
         program.add(bg);
         program.add(bar);
         racket.show();
+        addBricks();
         ball.show();
         life1.show();
         life2.show();
         life3.show();
-        addBricks();
+
     }
 
     @Override
