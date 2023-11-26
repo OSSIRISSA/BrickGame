@@ -30,4 +30,14 @@ public class HardBrick extends Brick{
             this.IsBroken = true;
         }
     }
+
+    @Override
+    public void show() {
+        super.show();
+    }
+
+    @Override
+    public void hide() {
+        super.hide();
+    }
 }

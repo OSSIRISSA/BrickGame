@@ -25,9 +25,9 @@ public class LevelSelection extends ScreenParent {
         for (int i=1; i<=4; i++){
             for (int j=1; j<=4; j++) {
                 if (((i-1)*4+j)<=Main.currentLevel) {
-                    levelButton = new LevelButton(program, sizeX / 4.5 * j - sizeX / 18.0, sizeY / 4.5 * i - sizeY / 18.0, sizeX / 9.0, sizeY / 9.0, Color.LIGHT_GRAY, ((i - 1) * 4 + j) + "", Color.BLUE, cyberFont, true);
+                    levelButton = new LevelButton(program, sizeX / 4.5 * j - sizeX / 18.0, sizeY / 4.5 * i - sizeY / 18.0, sizeX / 9.0, sizeY / 9.0, Color.LIGHT_GRAY, ((i - 1) * 4 + j) + "", Color.BLUE, cyberFont, true, "");
                 } else {
-                    levelButton = new LevelButton(program, sizeX / 4.5 * j - sizeX / 18.0, sizeY / 4.5 * i - sizeY / 18.0, sizeX / 9.0, sizeY / 9.0, Color.LIGHT_GRAY, ((i - 1) * 4 + j) + "", Color.BLUE, cyberFont, false);
+                    levelButton = new LevelButton(program, sizeX / 4.5 * j - sizeX / 18.0, sizeY / 4.5 * i - sizeY / 18.0, sizeX / 9.0, sizeY / 9.0, Color.LIGHT_GRAY, ((i - 1) * 4 + j) + "", Color.BLUE, cyberFont, false, "assets/lock.png");
                 }
                 levelButton.show();
             }
@@ -36,14 +36,14 @@ public class LevelSelection extends ScreenParent {
 
     @Override
     public void removeFromScreen() {
-        program.removeAll();
+        //program.removeAll();
 
-        /*program.remove(this.header);
+        program.remove(this.header);
         for (int i=1; i<=4; i++){
             for (int j=1; j<=4; j++) {
                 levelButton = (LevelButton) program.getElementAt(sizeX/4.5*j-sizeX/18.0, sizeY/4.5*i-sizeY/18.0);
                 levelButton.hide();
             }
-        }*/
+        }
     }
 }

@@ -18,10 +18,10 @@ public class LevelMaster extends ScreenParent {
     public static Heart life2;
     public static Heart life3;
 
-    private final static int  BRICK_NUMBER_X= 16;
-    private final static int BRICK_NUMBER_Y= 3;
-    private final static int BRICK_WIDTH = sizeX /BRICK_NUMBER_X;
-    private final static int BRICK_HEIGHT = 40;
+    public int  BRICK_NUMBER_X;
+    public int BRICK_NUMBER_Y;
+    public double BRICK_WIDTH;
+    public double BRICK_HEIGHT;
     public LevelMaster(GraphicsProgram program) {
         super(program);
         this.radius = Main.BALL_RADIUS;
@@ -40,6 +40,9 @@ public class LevelMaster extends ScreenParent {
         life3 = new Heart(program,125.0,25.0,50.0,50.0,"assets/heart2.gif");
     }
 
+    public void addBricks(){
+    }
+
     @Override
     public void addToScreen() {
         program.add(bg);
@@ -49,6 +52,7 @@ public class LevelMaster extends ScreenParent {
         life1.show();
         life2.show();
         life3.show();
+        addBricks();
     }
 
     @Override

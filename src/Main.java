@@ -23,7 +23,6 @@ public class Main extends GraphicsProgram {
     private final MainMenu mainMenu = new MainMenu(this);
     private final LevelSelection levelSelection = new LevelSelection(this);
     LevelButton levelButton;
-    private final Level1 level1 = new Level1(this);
     public static Racket racket;
     public void run(){
         this.setSize(MAX_X+14, MAX_Y+60);
@@ -70,7 +69,7 @@ public class Main extends GraphicsProgram {
             if(levelButton.isEnabled) {
                 levelSelection.removeFromScreen();
                 switch (Integer.parseInt(levelButton.getButtonText().getLabel())) {
-                    case 1 -> level1.addToScreen();
+                    case 1 -> {Level1 level1 = new Level1(this); level1.addToScreen();}
                     case 2 -> System.out.println(2);
                     case 3 -> System.out.println(3);
                     case 4 -> System.out.println(4);

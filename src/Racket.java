@@ -40,6 +40,6 @@ public class Racket extends GImage {
 
     public void hide(){
         isGameStarted=false;
-       program.remove(this);
+        program.remove(this);
     }
 }

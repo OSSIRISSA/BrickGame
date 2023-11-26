@@ -22,6 +22,15 @@ public boolean IsBroken;
         IsBroken=true;
         Crack.setVolume(1);
         Crack.play();
+        hide();
+    }
+
+
+    public void show(){
+        program.add(this);
+    }
+
+    public void hide(){
         program.remove(this);
     }
 

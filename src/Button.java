@@ -1,3 +1,4 @@
+import acm.graphics.GImage;
 import acm.graphics.GLabel;
 import acm.graphics.GRect;
 import acm.program.GraphicsProgram;
@@ -8,10 +9,12 @@ public class Button extends GRect {
 
     private final GRect buttonBG;
     private final GLabel buttonText;
+    private GImage lock;
+    public boolean isEnabled;
     public final GraphicsProgram program;
     public boolean isPressed;
 
-    public Button(GraphicsProgram program, double centerX, double centerY, double width, double height, Color buttonColor, String text, Color textColor, Font inFont) {
+    public Button(GraphicsProgram program, double centerX, double centerY, double width, double height, Color buttonColor, String text, Color textColor, Font inFont, boolean isEnabled, String lockPath) {
 
         /*
           Creates button background
@@ -40,18 +43,31 @@ public class Button extends GRect {
         /*
           Creates transparent GRect to collide with mouse events
          */
+        this.isEnabled = isEnabled;
+        if(!isEnabled && !lockPath.isEmpty()){
+            lock = new GImage(lockPath);
+            lock.setBounds(centerX - width/2, centerY - height/2, width, height);
+        }
+
+
         this.setBounds(centerX - width/2, centerY - height/2, width, height);
     }
 
     public void show(){
         program.add(buttonBG);
         program.add(buttonText);
+        if (!isEnabled) {
+            program.add(lock);
+        }
         program.add(this);
     }
 
     public void hide(){
         program.remove(buttonBG);
         program.remove(buttonText);
+        if (!isEnabled) {
+            program.remove(lock);
+        }
         program.remove(this);
     }
 

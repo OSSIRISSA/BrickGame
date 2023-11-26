@@ -18,7 +18,7 @@ public class MainMenu extends ScreenParent {
         header.setFont(cyberFont.deriveFont(60f));
         header.setLocation(sizeX/2.0-header.getWidth()/2, sizeY/2.0 - header.getHeight()*1.5);
 
-        play = new Button(program, sizeX/2.0, sizeY/2.0, sizeX/2.0, sizeY/10.0, Color.LIGHT_GRAY, "Start Game", Color.RED, cyberFont);
+        play = new Button(program, sizeX/2.0, sizeY/2.0, sizeX/2.0, sizeY/10.0, Color.LIGHT_GRAY, "Start Game", Color.RED, cyberFont, true, "");
     }
 
     public Button getPlayButton() {
