@@ -159,6 +159,7 @@ public class Ball extends GOval {
                             Main.waitingForStart = true;
                             Main.racket.hide();
                             Main.racket.show();
+                            ((Timer) evt.getSource()).stop();
                         }
                         vy *= -1;
                     }
