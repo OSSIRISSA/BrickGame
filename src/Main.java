@@ -69,6 +69,7 @@ public class Main extends GraphicsProgram {
         if (waitingForStart) {
             LevelMaster.racket.isGameStarted=true;
             LevelMaster.ball.gameStarted();
+            waitingForStart=false;
         } else
         if (objectUnderMouse != null && objectUnderMouse.equals(mainMenu.getPlayButton())) {
             mainMenu.removeFromScreen();

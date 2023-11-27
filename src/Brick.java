@@ -11,10 +11,12 @@ public boolean IsBroken;
     public GraphicsProgram program;
     public GImage brickImage;
     public Hardness hardness;
+    public final Color transparent = new Color(0,0,0,0);
+    public final Color halfTransparent = new Color(0,0,0,127);
     public Brick(GraphicsProgram program,  double x, double y, double width, double height, String brickPath) {
         super(x, y, width, height);
         IsBroken=false;
-        this.setColor(Color.BLACK);
+        this.setColor(transparent);
         this.setFilled(false);
         this.program = program;
         brickImage = new GImage(brickPath);

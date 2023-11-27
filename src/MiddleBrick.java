@@ -5,8 +5,8 @@ import java.awt.*;
 
 public class MiddleBrick extends Brick {
     private GImage crack;
-    public MiddleBrick(GraphicsProgram program, double x, double y, double width, double height, String brickPath) {
-        super(program, x, y, width, height, brickPath);
+    public MiddleBrick(GraphicsProgram program, double x, double y, double width, double height) {
+        super(program, x, y, width, height, "assets/middleBrick.png");
         this.hardness = Hardness.MIDDLE;
         crack = new GImage("assets/lightcrack.png", x, y);
         crack.setSize(width, height);

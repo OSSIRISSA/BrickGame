@@ -5,8 +5,8 @@ import java.awt.*;
 
 public class HardBrick extends Brick{
     private GImage crack;
-    public HardBrick(GraphicsProgram program, double x, double y, double width, double height, String brickPath) {
-        super(program, x, y, width, height, brickPath);
+    public HardBrick(GraphicsProgram program, double x, double y, double width, double height) {
+        super(program, x, y, width, height, "assets/hardBrick.png");
         this.hardness=Hardness.HARD;
     }
     public void breakIt() {
