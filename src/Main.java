@@ -81,6 +81,9 @@ public class Main extends GraphicsProgram {
         if (objectUnderMouse != null && objectUnderMouse.equals(mainMenu.getPlayButton())) {
             mainMenu.removeFromScreen();
             levelSelection.addToScreen();
+        } else if(objectUnderMouse != null && gameOver!=null&&objectUnderMouse.equals(gameOver.getGoToLevelSelection())){
+            gameOver.removeFromScreen();
+            levelSelection.addToScreen();
         } else if(objectUnderMouse != null && objectUnderMouse.getClass().equals(LevelButton.class)){
             levelButton = ((LevelButton) objectUnderMouse);
             if(levelButton.isEnabled) {
@@ -107,16 +110,15 @@ public class Main extends GraphicsProgram {
                 waitingForStart = true;
             }
         }
-        else if(objectUnderMouse != null && objectUnderMouse.equals(gameOver.getGoToMainMenuButton())){
-            gameOver.removeFromScreen();
-            mainMenu.addToScreen();
-        }
     }
 
     public void mousePressed(MouseEvent e) {
         if (objectUnderMouse != null && objectUnderMouse.equals(mainMenu.getPlayButton())) {
             mainMenu.getPlayButton().pressed();
             mainMenu.getPlayButton().isPressed=true;
+        } else if (objectUnderMouse != null && gameOver!=null&&objectUnderMouse.equals(gameOver.getGoToLevelSelection())) {
+            gameOver.getGoToLevelSelection().pressed();
+            gameOver.getGoToLevelSelection().isPressed=true;
         } else if (objectUnderMouse!=null && objectUnderMouse.equals(levelButton) && levelButton.isEnabled){
             levelButton.pressed();
             levelButton.isPressed=true;
@@ -127,7 +129,10 @@ public class Main extends GraphicsProgram {
         if (mainMenu.getPlayButton().isPressed) {
             mainMenu.getPlayButton().released();
             mainMenu.getPlayButton().isPressed=false;
-        } else if(levelButton!=null && levelButton.isPressed) {
+        } else if (gameOver!=null&&gameOver.getGoToLevelSelection().isPressed) {
+            gameOver.getGoToLevelSelection().released();
+            gameOver.getGoToLevelSelection().isPressed=false;
+        }else if(levelButton!=null && levelButton.isPressed) {
             levelButton.released();
             levelButton.isPressed=false;
         }

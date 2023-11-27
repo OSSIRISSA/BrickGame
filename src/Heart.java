@@ -13,6 +13,7 @@ public class Heart extends GImage {
         super(image,centerX-width/2,centerY-height/2);
         Heart.program = program;
         gameOver = new GameOver(program);
+        Main.gameOver=gameOver;
     }
 
     public static void updateLives(){
@@ -24,6 +25,7 @@ public class Heart extends GImage {
         }
         if(lifeCount==0){
             program.remove(LevelMaster.life1);
+            Main.waitingForStart=false;
             gameOver.addToScreen();
         }
     }
