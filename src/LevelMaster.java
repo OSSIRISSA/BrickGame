@@ -36,7 +36,7 @@ public class LevelMaster extends ScreenParent {
 
         racket = new Racket(program, "assets/board.png", sizeX/2.0, sizeY*0.9);
         Main.racket = racket;
-        ball = new Ball(program, racket.getX()+racket.getWidth()/2.0, racket.getY()-radius-2, radius, Color.CYAN);
+        ball = new Ball(program, racket.getX()+racket.getWidth()/2.0, racket.getY()-radius-3, radius, Color.CYAN);
         Main.ball = ball;
         life1 = new Heart(program,25.0,25.0,50.0,50.0,"assets/heart1.gif");
         life2 = new Heart(program,75.0,25.0,50.0,50.0,"assets/heart3.gif");

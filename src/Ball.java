@@ -10,7 +10,7 @@ public class Ball extends GOval {
     private Brick brick;
     private Brick brick2;
     public double vx = 3.0;
-    public double vy = 3.0;
+    public double vy = -3.0;
     private final GraphicsProgram program;
     private final double radius;
     public boolean isGameStarted=false;
@@ -154,6 +154,7 @@ public class Ball extends GOval {
                         if (Ball.this.getY() + radius * 2 + vy > program.getHeight() * 0.9) {
                             Heart.lifeCount--;
                             Heart.updateLives();
+                            Main.racket.setLocation(Main.MAX_X/2.0-Main.racket.getWidth()/2,LevelMaster.sizeY*0.9);
                             Ball.this.setLocation(Main.racket.getX() + Main.racket.getWidth() / 2.0-(radius/2.0), Main.racket.getY() - radius*2 - 2);
                             Main.waitingForStart = true;
                             Main.racket.hide();

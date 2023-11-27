@@ -24,16 +24,22 @@ public class Main extends GraphicsProgram {
         }
     }
     private final MainMenu mainMenu = new MainMenu(this);
+
+    public static GameOver gameOver;
     private final LevelSelection levelSelection = new LevelSelection(this);
     LevelButton levelButton;
     public static Racket racket;
 
     public static  Ball ball;
+
+
     public void run(){
         this.setSize(MAX_X+14, MAX_Y+60);
         addMouseListeners();
         mainMenu.addToScreen();
     }
+
+
 
     public void mouseMoved(MouseEvent e){
         GPoint last = new GPoint(e.getPoint());
@@ -100,6 +106,10 @@ public class Main extends GraphicsProgram {
                 }
                 waitingForStart = true;
             }
+        }
+        else if(objectUnderMouse != null && objectUnderMouse.equals(gameOver.getGoToMainMenuButton())){
+            gameOver.removeFromScreen();
+            mainMenu.addToScreen();
         }
     }
 
