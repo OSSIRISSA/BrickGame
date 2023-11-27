@@ -79,6 +79,7 @@ public class Ball extends GOval {
             }
             if(underDot2 instanceof Brick){
                 brick2= ((Brick) underDot2);
+
             }
             if(brick.equals(brick2)){
                 brick.breakIt();
@@ -140,33 +141,40 @@ public class Ball extends GOval {
     }
 
     public void gameStarted(){
+        if (Main.racket.isGameStarted) {
+            /*
+             *   TIMER
+             */
+            ActionListener taskPerformer = new ActionListener() {
+                public void actionPerformed(ActionEvent evt) {
 
-        /*
-         *   TIMER
-         */
-        ActionListener taskPerformer = new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-
-                if (Ball.this.getX() + radius * 2 + vx >= program.getWidth() || Ball.this.getX() + vx < 0) {
-                    vx *= -1;
-                }
-                if (Ball.this.getY() + radius * 2 + vy >= program.getHeight() || Ball.this.getY() + vy < 50) {
-                    if(Ball.this.getY() + radius * 2 + vy>program.getHeight()*0.9){
-                        Heart.lifeCount--;
-                        Heart.updateLives();
+                    if (Ball.this.getX() + radius * 2 + vx >= program.getWidth() || Ball.this.getX() + vx < 0) {
+                        vx *= -1;
                     }
-                    vy *= -1;
-                }
-                if (Ball.this.collidesWithRacket() && vy > 0) {
-                    vy *= -1;
-                    vx=collideAngle();
-                }
-                collidesWithBrick();
-                Ball.this.move(vx, vy);
+                    if (Ball.this.getY() + radius * 2 + vy >= program.getHeight() || Ball.this.getY() + vy < 50) {
+                        if (Ball.this.getY() + radius * 2 + vy > program.getHeight() * 0.9) {
+                            Heart.lifeCount--;
+                            Heart.updateLives();
+                            Ball.this.setLocation(Main.racket.getX() + Main.racket.getWidth() / 2.0, Main.racket.getY() - radius - 2);
+                            Main.waitingForStart = true;
+                            Main.racket.hide();
+                            Main.ball.hide();
+                            Main.racket.show();
+                            Main.ball.show();
+                        }
+                        vy *= -1;
+                    }
+                    if (Ball.this.collidesWithRacket() && vy > 0) {
+                        vy *= -1;
+                        vx = collideAngle();
+                    }
+                    collidesWithBrick();
+                    Ball.this.move(vx, vy);
 
-            }
-        };
-        new Timer(10, taskPerformer).start();
+                }
+            };
+            new Timer(10, taskPerformer).start();
+        }
     }
 
     private double collideAngle() {

@@ -18,6 +18,8 @@ public class LevelMaster extends ScreenParent {
     public static Heart life2;
     public static Heart life3;
 
+    public static Score score;
+
     public int  BRICK_NUMBER_X;
     public int BRICK_NUMBER_Y;
     public double BRICK_WIDTH;
@@ -39,6 +41,7 @@ public class LevelMaster extends ScreenParent {
         life1 = new Heart(program,25.0,25.0,50.0,50.0,"assets/heart1.gif");
         life2 = new Heart(program,75.0,25.0,50.0,50.0,"assets/heart3.gif");
         life3 = new Heart(program,125.0,25.0,50.0,50.0,"assets/heart2.gif");
+        score = new Score(program);
     }
 
     public void addBricks(){
@@ -54,7 +57,7 @@ public class LevelMaster extends ScreenParent {
         life1.show();
         life2.show();
         life3.show();
-
+        score.add();
     }
 
     @Override

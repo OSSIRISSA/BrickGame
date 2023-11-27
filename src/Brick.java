@@ -27,6 +27,7 @@ public boolean IsBroken;
         Crack.setVolume(1);
         Crack.play();
         hide();
+        LevelMaster.score.updateScore(this);
     }
 
 
