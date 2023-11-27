@@ -1,7 +1,5 @@
 import acm.program.GraphicsProgram;
 
-import java.awt.*;
-
 public class Level1 extends LevelMaster{
 
     private MiddleBrick brick;

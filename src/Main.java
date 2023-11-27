@@ -81,8 +81,8 @@ public class Main extends GraphicsProgram {
                 levelSelection.removeFromScreen();
                 switch (Integer.parseInt(levelButton.getButtonText().getLabel())) {
                     case 1 -> {Level1 level1 = new Level1(this); level1.addToScreen();}
-                    case 2 -> {Level2 level1 = new Level2(this); level1.addToScreen();}
-                    case 3 -> {Level3 level1 = new Level3(this); level1.addToScreen();}
+                    case 2 -> {Level2 level2 = new Level2(this); level2.addToScreen();}
+                    case 3 -> {Level3 level3 = new Level3(this); level3.addToScreen();}
                     case 4 -> System.out.println(4);
                     case 5 -> System.out.println(5);
                     case 6 -> System.out.println(6);
