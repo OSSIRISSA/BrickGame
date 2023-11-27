@@ -26,6 +26,7 @@ public class MiddleBrick extends Brick {
 
         } else {
             hide();
+            LevelMaster.score.updateScore(this);
             program.remove(crack);
             this.IsBroken = true;
         }

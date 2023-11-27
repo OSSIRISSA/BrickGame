@@ -11,7 +11,7 @@ public class Main extends GraphicsProgram {
     public static int currentLevel=1;
     public final static double BALL_RADIUS = 5;
 
-    public boolean waitingForStart = false;
+    public static boolean waitingForStart = false;
 
     public GObject objectUnderMouse;
     public static Font cyberFont;
@@ -67,6 +67,7 @@ public class Main extends GraphicsProgram {
 
     public void mouseClicked(MouseEvent e) {
         if (waitingForStart) {
+            waitingForStart=false;
             LevelMaster.racket.isGameStarted=true;
             LevelMaster.ball.gameStarted();
         } else
