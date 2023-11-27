@@ -141,13 +141,12 @@ public class Ball extends GOval {
     }
 
     public void gameStarted(){
-        if (Main.racket.isGameStarted) {
             /*
              *   TIMER
              */
             ActionListener taskPerformer = new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
-
+                    if(Main.racket.isGameStarted){
                     if (Ball.this.getX() + radius * 2 + vx >= program.getWidth() || Ball.this.getX() + vx < 0) {
                         vx *= -1;
                     }
@@ -155,12 +154,10 @@ public class Ball extends GOval {
                         if (Ball.this.getY() + radius * 2 + vy > program.getHeight() * 0.9) {
                             Heart.lifeCount--;
                             Heart.updateLives();
-                            Ball.this.setLocation(Main.racket.getX() + Main.racket.getWidth() / 2.0, Main.racket.getY() - radius - 2);
+                            Ball.this.setLocation(Main.racket.getX() + Main.racket.getWidth() / 2.0-(radius/2.0), Main.racket.getY() - radius*2 - 2);
                             Main.waitingForStart = true;
                             Main.racket.hide();
-                            Main.ball.hide();
                             Main.racket.show();
-                            Main.ball.show();
                         }
                         vy *= -1;
                     }
@@ -170,11 +167,11 @@ public class Ball extends GOval {
                     }
                     collidesWithBrick();
                     Ball.this.move(vx, vy);
+                    }
 
                 }
             };
             new Timer(10, taskPerformer).start();
-        }
     }
 
     private double collideAngle() {

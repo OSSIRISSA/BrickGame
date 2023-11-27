@@ -20,13 +20,13 @@ public class Score extends GLabel {
     public void add() { program.add(this); }
 
     public void updateScore(Brick brick){
-        if (brick.getClass().equals(HardBrick.class)){
+        if (brick.getClass().equals(HardBrick.class)&& !brick.IsBroken){
             currentScore+=300;
         }
-        if (brick.getClass().equals(MiddleBrick.class)){
+        if (brick.getClass().equals(MiddleBrick.class)&& !brick.IsBroken){
             currentScore+=200;
         }
-        if (brick.getClass().equals(WeakBrick.class)){
+        if (brick.getClass().equals(WeakBrick.class)&& !brick.IsBroken){
             currentScore+=100;
         }
         this.setLabel(""+currentScore);

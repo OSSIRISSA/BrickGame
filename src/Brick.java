@@ -23,11 +23,11 @@ public boolean IsBroken;
         brickImage.setBounds(x, y, width, height);
     }
     public void breakIt(){
+        LevelMaster.score.updateScore(this);
         IsBroken=true;
         Crack.setVolume(1);
         Crack.play();
         hide();
-        LevelMaster.score.updateScore(this);
     }
 
 
