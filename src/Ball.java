@@ -13,7 +13,6 @@ public class Ball extends GOval {
     public double vy = -3.0;
     private final GraphicsProgram program;
     private final double radius;
-    public boolean isGameStarted=false;
 
     /**
      * Creates a ball
@@ -138,6 +137,8 @@ public class Ball extends GOval {
             }
             vy*=-1;
         }
+        brick=null;
+        brick2=null;
     }
 
     public void gameStarted(){

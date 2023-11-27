@@ -52,7 +52,9 @@ public class Main extends GraphicsProgram {
             if ((previousObjectUnderMouse != null) && (!previousObjectUnderMouse.equals(objectUnderMouse))) {
                 if (previousObjectUnderMouse.equals(mainMenu.getPlayButton())) {
                     mainMenu.getPlayButton().released();
-                } else if (previousObjectUnderMouse.getClass().equals(LevelButton.class)) {
+                } else if (gameOver != null && previousObjectUnderMouse.equals(gameOver.getGoToLevelSelection())) {
+                    gameOver.getGoToLevelSelection().released();
+                }else if (previousObjectUnderMouse.getClass().equals(LevelButton.class)) {
                     levelButton = ((LevelButton) previousObjectUnderMouse);
                     if (!levelButton.isPressed && levelButton.isEnabled) {
                         levelButton.released();
@@ -61,7 +63,9 @@ public class Main extends GraphicsProgram {
             } else if ((objectUnderMouse != null) && (previousObjectUnderMouse == null || previousObjectUnderMouse.getClass().equals(LevelButton.class))) {
                 if (objectUnderMouse.equals(mainMenu.getPlayButton())) {
                     mainMenu.getPlayButton().hovered();
-                } else if (objectUnderMouse.getClass().equals(LevelButton.class)) {
+                } else if (gameOver != null && objectUnderMouse.equals(gameOver.getGoToLevelSelection())) {
+                    gameOver.getGoToLevelSelection().hovered();
+                }else if (objectUnderMouse.getClass().equals(LevelButton.class)) {
                     levelButton = ((LevelButton) objectUnderMouse);
                     if (!levelButton.isPressed && levelButton.isEnabled) {
                         levelButton.hovered();
