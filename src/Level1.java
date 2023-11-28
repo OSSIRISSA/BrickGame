@@ -2,7 +2,7 @@ import acm.program.GraphicsProgram;
 
 public class Level1 extends LevelMaster{
 
-    private MiddleBrick brick;
+    private WeakBrick brick;
     public Level1(GraphicsProgram program) {
         super(program);
         initialize();
@@ -24,11 +24,12 @@ public class Level1 extends LevelMaster{
         super.addBricks();
         this.BRICK_NUMBER_X = 7;
         this.BRICK_NUMBER_Y = 2;
+        LevelMaster.bricksLeft = BRICK_NUMBER_X*BRICK_NUMBER_Y;
         this.BRICK_WIDTH = (double) sizeX /BRICK_NUMBER_X;
         this.BRICK_HEIGHT = BRICK_WIDTH/2.0;
         for (int i=1; i<= BRICK_NUMBER_Y; i++){
             for (int j=1; j<=BRICK_NUMBER_X; j++){
-                brick= new MiddleBrick(program, (j-1)*BRICK_WIDTH, (i-1)*BRICK_HEIGHT+50, BRICK_WIDTH, BRICK_HEIGHT);
+                brick= new WeakBrick(program, (j-1)*BRICK_WIDTH, (i-1)*BRICK_HEIGHT+50, BRICK_WIDTH, BRICK_HEIGHT);
                 brick.show();
                 //System.out.println("added");
             }

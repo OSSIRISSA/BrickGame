@@ -1,5 +1,6 @@
 import acm.graphics.*;
 import acm.program.GraphicsProgram;
+import acm.util.SoundClip;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,6 +15,9 @@ public class Ball extends GOval {
     private final GraphicsProgram program;
     private final double radius;
     public boolean isGameStarted=false;
+    private SoundClip glassWall = new SoundClip("assets/glass.au");
+
+    private SoundClip glassRacket = new SoundClip("assets/glass.au");
 
     /**
      * Creates a ball
@@ -30,6 +34,8 @@ public class Ball extends GOval {
         this.setColor(Color.BLACK);
         this.setFilled(true);
         this.setFillColor(color);
+        glassWall.setVolume(1);
+        glassRacket.setVolume(1);
         /*
             Hitting the ball from the walls and movement
 
@@ -148,6 +154,7 @@ public class Ball extends GOval {
                 public void actionPerformed(ActionEvent evt) {
                     if(Main.racket.isGameStarted){
                     if (Ball.this.getX() + radius * 2 + vx >= program.getWidth() || Ball.this.getX() + vx < 0) {
+                        glassWall.play();
                         vx *= -1;
                     }
                     if (Ball.this.getY() + radius * 2 + vy >= program.getHeight() || Ball.this.getY() + vy < 50) {
@@ -160,9 +167,11 @@ public class Ball extends GOval {
                             Main.racket.isGameStarted=false;
                             ((Timer) evt.getSource()).stop();
                         }
+                        glassWall.play();
                         vy *= -1;
                     }
                     if (Ball.this.collidesWithRacket() && vy > 0) {
+                        glassRacket.play();
                         vy *= -1;
                         vx = collideAngle();
                     }

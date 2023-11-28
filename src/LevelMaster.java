@@ -24,6 +24,9 @@ public class LevelMaster extends ScreenParent {
     public int BRICK_NUMBER_Y;
     public double BRICK_WIDTH;
     public double BRICK_HEIGHT;
+
+    public static int bricksLeft = 0;
+
     public LevelMaster(GraphicsProgram program) {
         super(program);
         this.radius = Main.BALL_RADIUS;

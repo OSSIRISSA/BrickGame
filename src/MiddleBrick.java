@@ -1,5 +1,6 @@
 import acm.graphics.GImage;
 import acm.program.GraphicsProgram;
+import acm.util.SoundClip;
 
 import java.awt.*;
 
@@ -13,7 +14,7 @@ public class MiddleBrick extends Brick {
     }
 
     public void breakIt() {
-
+        Crack = new SoundClip("assets/Crack.au");
         Crack.setVolume(1);
         Crack.play();
         if (this.hardness != Hardness.WEAK) {

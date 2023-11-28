@@ -30,6 +30,7 @@ public class Level2 extends LevelMaster{
         super.addBricks();
         this.BRICK_NUMBER_X = 7;
         this.BRICK_NUMBER_Y = 6;
+        LevelMaster.bricksLeft = BRICK_NUMBER_X*BRICK_NUMBER_Y;
         this.BRICK_WIDTH = (double) sizeX /BRICK_NUMBER_X;
         this.BRICK_HEIGHT = BRICK_WIDTH/2.0;
         for (int i=1; i<= BRICK_NUMBER_Y; i++){

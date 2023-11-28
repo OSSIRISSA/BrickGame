@@ -23,11 +23,9 @@ public boolean IsBroken;
         brickImage.setBounds(x, y, width, height);
     }
     public void breakIt(){
-        LevelMaster.score.updateScore(this);
-        IsBroken=true;
+        Crack = new SoundClip("assets/Crack.au");
         Crack.setVolume(1);
         Crack.play();
-        hide();
     }
 
 
