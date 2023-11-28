@@ -144,6 +144,8 @@ public class Ball extends GOval {
             }
             vy*=-1;
         }
+        brick=null;
+        brick2=null;
     }
 
     public void gameStarted(){
