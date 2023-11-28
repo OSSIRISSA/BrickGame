@@ -27,7 +27,6 @@ public boolean IsBroken;
         Crack.play();
     }
 
-
     public void show(){
         program.add(brickImage);
         program.add(this);
@@ -37,6 +36,4 @@ public boolean IsBroken;
         program.remove(brickImage);
         program.remove(this);
     }
-
-
 }

@@ -6,7 +6,6 @@ import acm.program.GraphicsProgram;
 import java.awt.*;
 
 public class Button extends GRect {
-
     private final GRect buttonBG;
     private final GLabel buttonText;
     private GImage lock;

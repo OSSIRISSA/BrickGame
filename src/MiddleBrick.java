@@ -2,14 +2,12 @@ import acm.graphics.GImage;
 import acm.program.GraphicsProgram;
 import acm.util.SoundClip;
 
-import java.awt.*;
-
 public class MiddleBrick extends Brick {
-    private GImage crack;
+    private final GImage crack;
     public MiddleBrick(GraphicsProgram program, double x, double y, double width, double height) {
         super(program, x, y, width, height, "assets/middleBrick.png");
         this.hardness = Hardness.MIDDLE;
-        crack = new GImage("assets/lightcrack.png", x, y);
+        crack = new GImage("assets/light-crack.png", x, y);
         crack.setSize(width, height);
     }
 
@@ -20,7 +18,7 @@ public class MiddleBrick extends Brick {
         if (this.hardness != Hardness.WEAK) {
 
                 this.hardness = Hardness.WEAK;
-                crack.setImage("assets/hardcrack.png");
+                crack.setImage("assets/hard-crack.png");
                 crack.setSize(this.getWidth(), this.getHeight());
                 program.add(crack);
                 program.add(this);

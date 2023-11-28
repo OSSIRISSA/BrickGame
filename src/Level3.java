@@ -2,17 +2,10 @@ import acm.program.GraphicsProgram;
 
 public class Level3 extends LevelMaster {
 
-    private MiddleBrick mBrick;
-
-    private WeakBrick wBrick;
-    private HardBrick hBrick;
-
-
     public Level3(GraphicsProgram program) {
         super(program);
         initialize();
     }
-
 
     @Override
     public void addToScreen() {
@@ -21,7 +14,7 @@ public class Level3 extends LevelMaster {
 
     @Override
     public void initialize() {
-        super.initialize();
+        super.initialize("assets/bg3.png");
     }
 
     @Override
@@ -92,7 +85,6 @@ public class Level3 extends LevelMaster {
                         brick.show();
                     }
                 }
-                //System.out.println("added");
             }
         }
     }

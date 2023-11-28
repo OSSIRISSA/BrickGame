@@ -2,8 +2,6 @@ import acm.graphics.GImage;
 import acm.program.GraphicsProgram;
 import acm.util.SoundClip;
 
-import java.awt.*;
-
 public class HardBrick extends Brick{
     private GImage crack;
     public HardBrick(GraphicsProgram program, double x, double y, double width, double height) {
@@ -17,13 +15,13 @@ public class HardBrick extends Brick{
         if (this.hardness != Hardness.WEAK) {
             if (this.hardness != Hardness.MIDDLE) {
                 this.hardness = Hardness.MIDDLE;
-                crack = new GImage("assets/lightcrack.png", this.getX(), this.getY());
+                crack = new GImage("assets/light-crack.png", this.getX(), this.getY());
                 crack.setSize(this.getWidth(), this.getHeight());
                 program.add(crack);
                 program.add(this);
             } else {
                 this.hardness = Hardness.WEAK;
-                crack.setImage("assets/hardcrack.png");
+                crack.setImage("assets/hard-crack.png");
                 crack.setSize(this.getWidth(), this.getHeight());
             }
         } else {

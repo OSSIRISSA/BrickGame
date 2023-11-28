@@ -1,8 +1,4 @@
-import acm.graphics.GImage;
 import acm.program.GraphicsProgram;
-import acm.util.SoundClip;
-
-import java.awt.*;
 
 public class WeakBrick extends Brick{
     public WeakBrick(GraphicsProgram program, double x, double y, double width, double height) {

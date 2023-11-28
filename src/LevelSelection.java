@@ -24,10 +24,10 @@ public class LevelSelection extends ScreenParent {
         program.add(header);
         for (int i=1; i<=4; i++){
             for (int j=1; j<=4; j++) {
-                if (((i-1)*4+j)<=Main.currentLevel) {
+                if (((i-1)*4+j)<=Main.maxLevelAvailable) {
                     levelButton = new LevelButton(program, sizeX / 4.5 * j - sizeX / 18.0, sizeY / 4.5 * i - sizeY / 18.0, sizeX / 9.0, sizeY / 9.0, Color.LIGHT_GRAY, ((i - 1) * 4 + j) + "", Color.BLUE, cyberFont, true, "");
                 } else {
-                    levelButton = new LevelButton(program, sizeX / 4.5 * j - sizeX / 18.0, sizeY / 4.5 * i - sizeY / 18.0, sizeX / 9.0, sizeY / 9.0, Color.LIGHT_GRAY, ((i - 1) * 4 + j) + "", Color.BLUE, cyberFont, true, "assets/lock.png");
+                    levelButton = new LevelButton(program, sizeX / 4.5 * j - sizeX / 18.0, sizeY / 4.5 * i - sizeY / 18.0, sizeX / 9.0, sizeY / 9.0, Color.LIGHT_GRAY, ((i - 1) * 4 + j) + "", Color.BLUE, cyberFont, false, "assets/lock.png");
                 }
                 levelButton.show();
             }
