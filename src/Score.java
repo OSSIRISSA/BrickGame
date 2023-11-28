@@ -10,6 +10,7 @@ public class Score extends GLabel {
 
     public GraphicsProgram program;
 
+    public static Victory victoryWindow;
     public SoundClip victory = new SoundClip("assets/victory.au");
 
     public Score(GraphicsProgram program) {
@@ -17,29 +18,34 @@ public class Score extends GLabel {
         this.setColor(Color.WHITE);
         this.setFont(Main.cyberFont.deriveFont(60f));
         this.program = program;
-        this.setLocation(Main.MAX_X-this.getWidth()-10,this.getHeight()-5);
+        this.setLocation(Main.MAX_X - this.getWidth() - 10, this.getHeight() - 5);
+        victoryWindow = new Victory(program);
+        Main.victoryWindow = victoryWindow;
     }
 
-    public void add() { program.add(this); }
+    public void add() {
+        program.add(this);
+    }
 
-    public void updateScore(Brick brick){
-        if (brick.getClass().equals(HardBrick.class)&& !brick.IsBroken){
-            currentScore+=300;
+    public void updateScore(Brick brick) {
+        if (brick.getClass().equals(HardBrick.class) && !brick.IsBroken) {
+            currentScore += 300;
             LevelMaster.bricksLeft--;
         }
-        if (brick.getClass().equals(MiddleBrick.class)&& !brick.IsBroken){
-            currentScore+=200;
+        if (brick.getClass().equals(MiddleBrick.class) && !brick.IsBroken) {
+            currentScore += 200;
             LevelMaster.bricksLeft--;
         }
-        if (brick.getClass().equals(WeakBrick.class)&& !brick.IsBroken){
-            currentScore+=100;
+        if (brick.getClass().equals(WeakBrick.class) && !brick.IsBroken) {
+            currentScore += 100;
             LevelMaster.bricksLeft--;
         }
-        this.setLabel(""+currentScore);
-        this.setLocation(Main.MAX_X-this.getWidth()-10,this.getHeight()-5);
-        if(LevelMaster.bricksLeft==0){
+        this.setLabel("" + currentScore);
+        this.setLocation(Main.MAX_X - this.getWidth() - 10, this.getHeight() - 5);
+        if (LevelMaster.bricksLeft == 0) {
             victory.setVolume(1);
             victory.play();
+            victoryWindow.addToScreen();
         }
     }
 }

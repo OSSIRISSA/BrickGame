@@ -5,7 +5,7 @@ import acm.util.SoundClip;
 
 import java.awt.*;
 
-public class GameOver extends ScreenParent {
+public class Victory extends ScreenParent {
 
 
     public Button goToLevelSelection;
@@ -14,17 +14,17 @@ public class GameOver extends ScreenParent {
     private GRect menuBG;
     public final Color halfTransparent = new Color(0,0,0,101);
 
-    private final SoundClip fail = new SoundClip("assets/fail.au");
-    public GameOver(GraphicsProgram program) {
+    private SoundClip fail = new SoundClip("assets/fail.au");
+    public Victory(GraphicsProgram program) {
         super(program);
         initialize();
     }
     public void initialize(){
-        header = new GLabel("Game Over");
+        header = new GLabel("Victory");
         header.setFont(cyberFont.deriveFont(38f));
         header.setLocation(sizeX/2.0-header.getWidth()/2, 50+(sizeY-50)/2.0 - header.getHeight()*1.5);
         header.setColor(Color.yellow);
-        goToLevelSelection = new Button(program, sizeX/2.0, 50+(sizeY-50)/2.0, sizeX/4.0, sizeY/15.0, Color.LIGHT_GRAY, "Try again", Color.RED, cyberFont, true, "");
+        goToLevelSelection = new Button(program, sizeX/2.0, 50+(sizeY-50)/2.0, sizeX/4.0, sizeY/15.0, Color.LIGHT_GRAY, "  Select level", Color.RED, cyberFont, true, "");
     }
 
     public Button getGoToLevelSelection() {
@@ -40,8 +40,6 @@ public class GameOver extends ScreenParent {
         menuBG.setColor(halfTransparent);
         program.add(menuBG);
         goToLevelSelection.show();
-        fail.setVolume(1);
-        fail.play();
         program.add(header);
     }
 

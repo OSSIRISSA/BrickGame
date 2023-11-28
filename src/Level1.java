@@ -22,8 +22,8 @@ public class Level1 extends LevelMaster{
     @Override
     public void addBricks() {
         super.addBricks();
-        this.BRICK_NUMBER_X = 7;
-        this.BRICK_NUMBER_Y = 2;
+        this.BRICK_NUMBER_X = 1;
+        this.BRICK_NUMBER_Y = 1;
         LevelMaster.bricksLeft = BRICK_NUMBER_X*BRICK_NUMBER_Y;
         this.BRICK_WIDTH = (double) sizeX /BRICK_NUMBER_X;
         this.BRICK_HEIGHT = BRICK_WIDTH/2.0;

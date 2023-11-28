@@ -38,7 +38,7 @@ public class Button extends GRect {
             buttonText.setFont(inFont.deriveFont(size));
         }
         buttonText.setColor(textColor);
-        buttonText.setLocation(centerX - buttonText.getWidth() / 2, centerY + buttonText.getHeight() / 4);
+        buttonText.setLocation(centerX - buttonText.getWidth() *0.5, centerY + buttonText.getHeight() / 4);
 
         /*
           Creates transparent GRect to collide with mouse events

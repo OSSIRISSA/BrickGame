@@ -1,5 +1,6 @@
 import acm.graphics.*;
 import acm.program.GraphicsProgram;
+
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -8,11 +9,10 @@ import java.io.IOException;
 public class Main extends GraphicsProgram {
     public final static int MAX_X = 700;
     public final static int MAX_Y = 700;
-    public static int currentLevel=1;
+    public static int currentLevel = 1;
     public final static double BALL_RADIUS = 5;
 
     public static boolean waitingForStart = false;
-
     public GObject objectUnderMouse;
     public static Font cyberFont;
 
@@ -23,38 +23,46 @@ public class Main extends GraphicsProgram {
             throw new RuntimeException(e);
         }
     }
+
     private final MainMenu mainMenu = new MainMenu(this);
 
     public static GameOver gameOver;
+    public static Victory victoryWindow;
+
     private final LevelSelection levelSelection = new LevelSelection(this);
     LevelButton levelButton;
     public static Racket racket;
 
-    public static  Ball ball;
+    public static Ball ball;
 
 
-    public void run(){
-        this.setSize(MAX_X+14, MAX_Y+60);
+    public void run() {
+        this.setSize(MAX_X + 14, MAX_Y + 60);
         addMouseListeners();
         mainMenu.addToScreen();
     }
 
 
-
-    public void mouseMoved(MouseEvent e){
+    public void mouseMoved(MouseEvent e) {
         GPoint last = new GPoint(e.getPoint());
         GObject previousObjectUnderMouse = objectUnderMouse;
         objectUnderMouse = getElementAt(last);
 
-        if (racket!=null && racket.isGameStarted) {
+        if (racket != null && racket.isGameStarted) {
             racket.movingToMouse(e.getX());
         } else {
+            //System.out.println(victoryWindow != null && objectUnderMouse.equals(victoryWindow.getGoToLevelSelection()));
             if ((previousObjectUnderMouse != null) && (!previousObjectUnderMouse.equals(objectUnderMouse))) {
                 if (previousObjectUnderMouse.equals(mainMenu.getPlayButton())) {
                     mainMenu.getPlayButton().released();
-                } else if (gameOver != null && previousObjectUnderMouse.equals(gameOver.getGoToLevelSelection())) {
+                }
+                if (gameOver != null && previousObjectUnderMouse.equals(gameOver.getGoToLevelSelection())) {
                     gameOver.getGoToLevelSelection().released();
-                }else if (previousObjectUnderMouse.getClass().equals(LevelButton.class)) {
+                }
+                if (victoryWindow != null && previousObjectUnderMouse.equals(victoryWindow.getGoToLevelSelection())) {
+                    victoryWindow.getGoToLevelSelection().released();
+                }
+                if (previousObjectUnderMouse.getClass().equals(LevelButton.class)) {
                     levelButton = ((LevelButton) previousObjectUnderMouse);
                     if (!levelButton.isPressed && levelButton.isEnabled) {
                         levelButton.released();
@@ -63,9 +71,14 @@ public class Main extends GraphicsProgram {
             } else if ((objectUnderMouse != null) && (previousObjectUnderMouse == null || previousObjectUnderMouse.getClass().equals(LevelButton.class))) {
                 if (objectUnderMouse.equals(mainMenu.getPlayButton())) {
                     mainMenu.getPlayButton().hovered();
-                } else if (gameOver != null && objectUnderMouse.equals(gameOver.getGoToLevelSelection())) {
+                }
+                if (gameOver != null && objectUnderMouse.equals(gameOver.getGoToLevelSelection())) {
                     gameOver.getGoToLevelSelection().hovered();
-                }else if (objectUnderMouse.getClass().equals(LevelButton.class)) {
+                }
+                if (victoryWindow != null && objectUnderMouse.equals(victoryWindow.getGoToLevelSelection())) {
+                    victoryWindow.getGoToLevelSelection().hovered();
+                }
+                if (objectUnderMouse.getClass().equals(LevelButton.class)) {
                     levelButton = ((LevelButton) objectUnderMouse);
                     if (!levelButton.isPressed && levelButton.isEnabled) {
                         levelButton.hovered();
@@ -77,25 +90,36 @@ public class Main extends GraphicsProgram {
 
     public void mouseClicked(MouseEvent e) {
         if (waitingForStart) {
-            waitingForStart=false;
-            LevelMaster.racket.isGameStarted=true;
+            waitingForStart = false;
+            LevelMaster.racket.isGameStarted = true;
             LevelMaster.ball.gameStarted();
-            waitingForStart=false;
-        } else
-        if (objectUnderMouse != null && objectUnderMouse.equals(mainMenu.getPlayButton())) {
+            waitingForStart = false;
+        } else if (objectUnderMouse != null && objectUnderMouse.equals(mainMenu.getPlayButton())) {
             mainMenu.removeFromScreen();
             levelSelection.addToScreen();
-        } else if(objectUnderMouse != null && gameOver!=null&&objectUnderMouse.equals(gameOver.getGoToLevelSelection())){
-            gameOver.removeFromScreen();
+        } else if (objectUnderMouse != null && gameOver != null && objectUnderMouse.equals(gameOver.getGoToLevelSelection())) {
+            removeAll();
             levelSelection.addToScreen();
-        } else if(objectUnderMouse != null && objectUnderMouse.getClass().equals(LevelButton.class)){
+        } else if (objectUnderMouse != null && victoryWindow != null && objectUnderMouse.equals(victoryWindow.getGoToLevelSelection())) {
+            removeAll();
+            levelSelection.addToScreen();
+        } else if (objectUnderMouse != null && objectUnderMouse.getClass().equals(LevelButton.class)) {
             levelButton = ((LevelButton) objectUnderMouse);
-            if(levelButton.isEnabled) {
+            if (levelButton.isEnabled) {
                 levelSelection.removeFromScreen();
                 switch (Integer.parseInt(levelButton.getButtonText().getLabel())) {
-                    case 1 -> {Level1 level1 = new Level1(this); level1.addToScreen();}
-                    case 2 -> {Level2 level2 = new Level2(this); level2.addToScreen();}
-                    case 3 -> {Level3 level3 = new Level3(this); level3.addToScreen();}
+                    case 1 -> {
+                        Level1 level1 = new Level1(this);
+                        level1.addToScreen();
+                    }
+                    case 2 -> {
+                        Level2 level2 = new Level2(this);
+                        level2.addToScreen();
+                    }
+                    case 3 -> {
+                        Level3 level3 = new Level3(this);
+                        level3.addToScreen();
+                    }
                     case 4 -> System.out.println(4);
                     case 5 -> System.out.println(5);
                     case 6 -> System.out.println(6);
@@ -119,26 +143,32 @@ public class Main extends GraphicsProgram {
     public void mousePressed(MouseEvent e) {
         if (objectUnderMouse != null && objectUnderMouse.equals(mainMenu.getPlayButton())) {
             mainMenu.getPlayButton().pressed();
-            mainMenu.getPlayButton().isPressed=true;
-        } else if (objectUnderMouse != null && gameOver!=null&&objectUnderMouse.equals(gameOver.getGoToLevelSelection())) {
+            mainMenu.getPlayButton().isPressed = true;
+        } else if (objectUnderMouse != null && gameOver != null && objectUnderMouse.equals(gameOver.getGoToLevelSelection())) {
             gameOver.getGoToLevelSelection().pressed();
-            gameOver.getGoToLevelSelection().isPressed=true;
-        } else if (objectUnderMouse!=null && objectUnderMouse.equals(levelButton) && levelButton.isEnabled){
+            gameOver.getGoToLevelSelection().isPressed = true;
+        } else if (objectUnderMouse != null && victoryWindow != null && objectUnderMouse.equals(victoryWindow.getGoToLevelSelection())) {
+            victoryWindow.getGoToLevelSelection().pressed();
+            victoryWindow.getGoToLevelSelection().isPressed = true;
+        } else if (objectUnderMouse != null && objectUnderMouse.equals(levelButton) && levelButton.isEnabled) {
             levelButton.pressed();
-            levelButton.isPressed=true;
+            levelButton.isPressed = true;
         }
     }
 
     public void mouseReleased(MouseEvent e) {
         if (mainMenu.getPlayButton().isPressed) {
             mainMenu.getPlayButton().released();
-            mainMenu.getPlayButton().isPressed=false;
-        } else if (gameOver!=null&&gameOver.getGoToLevelSelection().isPressed) {
+            mainMenu.getPlayButton().isPressed = false;
+        } else if (gameOver != null && gameOver.getGoToLevelSelection().isPressed) {
             gameOver.getGoToLevelSelection().released();
-            gameOver.getGoToLevelSelection().isPressed=false;
-        }else if(levelButton!=null && levelButton.isPressed) {
+            gameOver.getGoToLevelSelection().isPressed = false;
+        } else if (victoryWindow != null && victoryWindow.getGoToLevelSelection().isPressed) {
+            victoryWindow.getGoToLevelSelection().released();
+            victoryWindow.getGoToLevelSelection().isPressed = false;
+        } else if (levelButton != null && levelButton.isPressed) {
             levelButton.released();
-            levelButton.isPressed=false;
+            levelButton.isPressed = false;
         }
     }
 }

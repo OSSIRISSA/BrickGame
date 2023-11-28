@@ -161,11 +161,17 @@ public class Ball extends GOval {
                     }
                     if (Ball.this.getY() + radius * 2 + vy >= program.getHeight() || Ball.this.getY() + vy < 50) {
                         if (Ball.this.getY() + radius * 2 + vy > program.getHeight() * 0.9) {
-                            Main.waitingForStart = true;
                             Heart.lifeCount--;
+                            if(Heart.lifeCount>0){
+                                System.out.println(Heart.lifeCount);
+                                Main.racket.setLocation(Main.MAX_X/2.0-Main.racket.getWidth()/2,Main.racket.getY());
+                                Ball.this.setLocation(Main.racket.getX() + Main.racket.getWidth() / 2, Main.racket.getY() - radius*2 - 2);
+                            }
+                            else{
+                                program.remove(Main.ball);
+                            }
+                            Main.waitingForStart = true;
                             Heart.updateLives();
-                            Main.racket.setLocation(Main.MAX_X/2.0-Main.racket.getWidth()/2,Main.racket.getY());
-                            Ball.this.setLocation(Main.racket.getX() + Main.racket.getWidth() / 2, Main.racket.getY() - radius*2 - 2);
                             Main.racket.isGameStarted=false;
                             ((Timer) evt.getSource()).stop();
                         }
