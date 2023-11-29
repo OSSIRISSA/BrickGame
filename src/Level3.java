@@ -1,22 +1,35 @@
 import acm.program.GraphicsProgram;
-
+/**
+ * Represents the third level of the game.
+ * Extends LevelMaster.
+ */
 public class Level3 extends LevelMaster {
-
+    /**
+     * Constructs the Level3 object.
+     *
+     * @param program The graphics program that called this method.
+     */
     public Level3(GraphicsProgram program) {
         super(program);
         initialize();
     }
-
+    /**
+     * Adds this level's components to the screen.
+     */
     @Override
     public void addToScreen() {
         super.addToScreen();
     }
-
+    /**
+     * Initializes the third level.
+     */
     @Override
     public void initialize() {
         super.initialize("assets/bg3.png");
     }
-
+    /**
+     * Adds bricks for the third level.
+     */
     @Override
     public void addBricks() {
         super.addBricks();

@@ -5,7 +5,9 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
-
+/**Represents Main program class.
+ * Extends GraphicsProgram
+ */
 public class Main extends GraphicsProgram {
     public final static int MAX_X = 700;
     public final static int MAX_Y = 700;
@@ -37,14 +39,19 @@ public class Main extends GraphicsProgram {
 
     public static Ball ball;
 
-
+/**
+ * Runs the program itself
+ * */
     public void run() {
         this.setSize(MAX_X + 14, MAX_Y + 60);
+        //adds interface, that listens mouse actions
         addMouseListeners();
         mainMenu.addToScreen();
     }
 
-
+    /**
+     * Reacts on the movement of the mouse and performs actions, depending on the program state
+     * */
     public void mouseMoved(MouseEvent e) {
         GPoint last = new GPoint(e.getPoint());
         GObject previousObjectUnderMouse = objectUnderMouse;
@@ -96,7 +103,9 @@ public class Main extends GraphicsProgram {
             }
         }
     }
-
+    /**
+     * Reacts on the clicking of the mouse and performs actions, depending on the program state
+     * */
     public void mouseClicked(MouseEvent e) {
         if (waitingForStart) {
             waitingForStart = false;
@@ -192,7 +201,9 @@ public class Main extends GraphicsProgram {
             }
         }
     }
-
+    /**
+     * Reacts on the pressing of the mouse and performs actions, depending on the program state
+     * */
     public void mousePressed(MouseEvent e) {
         if (objectUnderMouse != null && objectUnderMouse.equals(mainMenu.getPlayButton())) {
             mainMenu.getPlayButton().pressed();
@@ -214,7 +225,9 @@ public class Main extends GraphicsProgram {
             levelButton.isPressed = true;
         }
     }
-
+    /**
+     * Reacts on the releasing of the mouse and performs actions, depending on the program state
+     * */
     public void mouseReleased(MouseEvent e) {
         if (mainMenu.getPlayButton().isPressed) {
             mainMenu.getPlayButton().released();

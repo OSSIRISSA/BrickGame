@@ -1,3 +1,7 @@
+/**
+ * Represents a ball object in the game.
+ * Extends GOval.
+ */
 import acm.graphics.*;
 import acm.program.GraphicsProgram;
 import acm.util.SoundClip;
@@ -10,8 +14,11 @@ import java.awt.event.ActionListener;
 public class Ball extends GOval {
     private Brick brick;
     private Brick brick2;
+    //horizontal speed of the ball
     public double vx = 5.0;
+    //vertical speed of the ball
     public double vy = -4.0;
+    //boolean for stopping the ball
     public boolean turnTimerOff=false;
     private final GraphicsProgram program;
     private final double radius;
@@ -40,13 +47,17 @@ public class Ball extends GOval {
     }
 
     /**
-     * @return - condition "if ball touches the racket"
+     * Checks if the ball collides with the racket.
+     *
+     * @return True if the ball touches the racket, otherwise false.
      */
     private boolean collidesWithRacket() {
         GObject objectUnderMouse = program.getElementAt(this.getX() + this.getWidth() / 2, this.getY() + this.getHeight() + 1);
         return (objectUnderMouse != null && objectUnderMouse.equals(Main.racket));
     }
-
+    /**
+     * Checks and handles collisions with bricks.
+     */
     private void collidesWithBrick() {
         GPoint dot1 = new GPoint(this.getX(), this.getY() - Math.abs(vy));
         GPoint dot2 = new GPoint(this.getX() + radius * 2, this.getY() - Math.abs(vy));
@@ -128,7 +139,9 @@ public class Ball extends GOval {
         brick = null;
         brick2 = null;
     }
-
+    /**
+     * Starts the game.
+     */
     public void gameStarted() {
         /*
          *   TIMER
@@ -177,7 +190,11 @@ public class Ball extends GOval {
         };
         new Timer(10, taskPerformer).start();
     }
-
+    /**
+     * Calculates the angle at which the ball collides with the racket.
+     *
+     * @return The new velocity in the x-direction after collision.
+     */
     private double collideAngle() {
         double vxMax = 5.0;
         double vxMin = 5.0 * 0.2;
@@ -198,11 +215,15 @@ public class Ball extends GOval {
             return (vxMax - vxMin) * ballMiddleX + vxMin;
         }
     }
-
+    /**
+     * Displays the ball on the screen.
+     */
     public void show() {
         program.add(this);
     }
-
+    /**
+     * Hides the ball from the screen.
+     */
     public void hide() {
         program.remove(this);
     }

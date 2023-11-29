@@ -1,23 +1,36 @@
 import acm.program.GraphicsProgram;
-
+/**
+ * Represents the first level of the game.
+ * Extends LevelMaster.
+ */
 public class Level1 extends LevelMaster{
-
+    /**
+     * Constructs the Level1 object.
+     *
+     * @param program The graphics program that called this method.
+     */
     public Level1(GraphicsProgram program) {
         super(program);
         initialize();
     }
 
-
+    /**
+     * Adds this level's components to the screen.
+     */
     @Override
     public void addToScreen() {
         super.addToScreen();
     }
-
+    /**
+     * Initializes the first level.
+     */
     @Override
     public void initialize() {
         super.initialize("assets/bg1.png");
     }
-
+    /**
+     * Adds bricks for the first level.
+     */
     @Override
     public void addBricks() {
         super.addBricks();
