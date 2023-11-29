@@ -2,23 +2,35 @@ import acm.graphics.GLabel;
 import acm.program.GraphicsProgram;
 
 import java.awt.*;
-
+/**
+ * Represents the level selection screen containing level buttons.
+ * Extends ScreenParent class.
+ */
 public class LevelSelection extends ScreenParent {
     private GLabel header;
     private LevelButton levelButton;
 
+    /**
+     * Constructs a LevelSelection object.
+     *
+     * @param program The graphics program that called this method.
+     */
     public LevelSelection(GraphicsProgram program) {
         super(program);
         initialize();
     }
-
+    /**
+     * Initializes the level selection screen.
+     */
     @Override
     public void initialize() {
         header = new GLabel("Select level");
         header.setFont(cyberFont.deriveFont(60f));
         header.setLocation(sizeX/2.0-header.getWidth()/2, header.getHeight());
     }
-
+    /**
+     * Adds the level selection screen components to the screen.
+     */
     @Override
     public void addToScreen() {
         program.add(header);
@@ -33,7 +45,9 @@ public class LevelSelection extends ScreenParent {
             }
         }
     }
-
+    /**
+     * Removes the level selection screen components from the screen.
+     */
     @Override
     public void removeFromScreen() {
         //program.removeAll();

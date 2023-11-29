@@ -2,18 +2,28 @@ import acm.graphics.GLabel;
 import acm.program.GraphicsProgram;
 
 import java.awt.*;
-
+/**
+ * The MainMenu class represents the main menu screen of the game.
+ * It contains the initialization of the main menu elements such as header, author credits, and play button.
+ */
 public class MainMenu extends ScreenParent {
 
 
     private Button play;
     private GLabel header;
     private GLabel authors;
+    /**
+     * Constructs a MainMenu object.
+     *
+     * @param program The GraphicsProgram instance to which the main menu belongs.
+     */
     public MainMenu(GraphicsProgram program) {
         super(program);
         initialize();
     }
-
+    /**
+     * Initializes the main menu components such as header, author credits, and play button.
+     */
     public void initialize(){
         header = new GLabel("Game Name");
         header.setFont(cyberFont.deriveFont(60f));
@@ -25,18 +35,26 @@ public class MainMenu extends ScreenParent {
 
         play = new Button(program, sizeX/2.0, sizeY/2.0, sizeX/2.0, sizeY/10.0, Color.LIGHT_GRAY, "Start Game", Color.RED, cyberFont, true, "");
     }
-
+    /**
+     * Gets the play button.
+     *
+     * @return The play button instance.
+     */
     public Button getPlayButton() {
         return play;
     }
-
+    /**
+     * Adds the main menu components to the screen.
+     */
     @Override
     public void addToScreen() {
         play.show();
         program.add(authors);
         program.add(header);
     }
-
+    /**
+     * Removes the main menu components from the screen.
+     */
     @Override
     public void removeFromScreen() {
         play.hide();

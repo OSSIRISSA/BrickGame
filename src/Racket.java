@@ -1,6 +1,9 @@
 import acm.graphics.GImage;
 import acm.program.GraphicsProgram;
-
+/**
+ * The Racket class represents the game's racket.
+ * It extends the GImage class and contains functionalities related to the game's racket.
+ */
 public class Racket extends GImage {
 
     GraphicsProgram program;
@@ -32,11 +35,16 @@ public class Racket extends GImage {
             }
         }
     }
-
+    /**
+     * Shows the racket by adding it to the associated program.
+     */
     public void show(){
         program.add(this);
     }
-
+    /**
+     * Hides the racket by removing it from the associated program.
+     * Also sets the game state to not started.
+     */
     public void hide(){
         isGameStarted=false;
         program.remove(this);

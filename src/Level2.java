@@ -1,22 +1,35 @@
 import acm.program.GraphicsProgram;
-
+/**
+ * Represents the second level of the game.
+ * Extends LevelMaster.
+ */
 public class Level2 extends LevelMaster{
-
+    /**
+     * Constructs the Level2 object.
+     *
+     * @param program The graphics program that called this method.
+     */
     public Level2(GraphicsProgram program) {
         super(program);
         initialize();
     }
-
+    /**
+     * Adds this level's components to the screen.
+     */
     @Override
     public void addToScreen() {
         super.addToScreen();
     }
-
+    /**
+     * Initializes the second level.
+     */
     @Override
     public void initialize() {
         super.initialize("assets/bg2.png");
     }
-
+    /**
+     * Adds bricks for the second level.
+     */
     @Override
     public void addBricks() {
         super.addBricks();
