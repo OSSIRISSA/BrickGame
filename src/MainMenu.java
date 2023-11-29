@@ -25,7 +25,7 @@ public class MainMenu extends ScreenParent {
      * Initializes the main menu components such as header, author credits, and play button.
      */
     public void initialize(){
-        header = new GLabel("Game Name");
+        header = new GLabel("BreakOut");
         header.setFont(cyberFont.deriveFont(60f));
         header.setLocation(sizeX/2.0-header.getWidth()/2, sizeY/2.0 - header.getHeight()*1.5);
 
