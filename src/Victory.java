@@ -68,7 +68,9 @@ public class Victory extends ScreenParent {
         Heart.lifeCount=3;
         Main.racket.isGameStarted = false;
         program.add(menuBG);
-        nextLevel.show();
+        if (Main.currentLevel<3){
+            nextLevel.show();
+        }
         goToLevelSelection.show();
         program.add(header);
 
