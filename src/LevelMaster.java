@@ -50,6 +50,7 @@ public class LevelMaster extends ScreenParent {
     public void initialize(String bgImage) {
         // Initialize background and bar
         bg = new GImage(bgImage);
+        bg.setSize(program.getWidth(), program.getHeight());
         bar = new GRect(0, 0, sizeX, 49);
         bar.setFilled(true);
 // Initialize game components

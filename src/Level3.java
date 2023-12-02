@@ -25,7 +25,7 @@ public class Level3 extends LevelMaster {
      */
     @Override
     public void initialize() {
-        super.initialize("assets/bg3.png");
+        super.initialize("assets/Lucy.jpg");
     }
     /**
      * Adds bricks for the third level.
